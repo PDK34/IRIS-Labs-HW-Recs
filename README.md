@@ -1,19 +1,29 @@
-# IRIS Labs Hardware Recruitments - 2026
+# IRIS Labs Hardware Recruitments - Assignment 1
 
-Thank you for showing your interest in joining IRIS Labs
+## Part A : Testing CDC understanding
+Questions:
+1. Explain why synchronizing each bit of an encoded multi-bit control signal independently can lead to incorrect decoding in the receiving clock domain.
 
+- The main problem with using individual synchronizers for multi-bit signal is the fact that the different flip flops that sample these bits may not do it at the exact same point .This can be due to slightly different electronic features internal to the different flip flops due to factors such as process variations across their die or due to possible external factors such as small data changing skews or slighly different propagation delay for the flip flops .Also, another issue is that the different synchronizers can have different metastability resolution times as well as possibly different rise and fall times. These differences can cause different bits to not reach the destination simultaneously and can get sampled at different at different clock edge in the destination clock edges. As a result, this can cause unwanted or wrong intermediate output signals to form at the destination.
 
-## Submission Guidelines :
+2. Using the timing diagram, describe how skew between b[1] and b[0] causes adec[2:0] to momentarily take an invalid intermediate value.
+ 
+ In the given timing diagram(in waveform.png file), it can be seen that b[0] transition at a slightly prior moment to b[1] and b[2]. Due to this reason, aq1[0] transitions to logic 1 ,one clock cycle(of Aclk) before aq1[1] and aq1[2] are asserted to logic 1 .Due to this, an unintended intermediate aq signal of 001 is asserted causing an invalid intermediate decode signal of aen[1] to be set for one cycle period before aq1 becomes 111 leading to the correct intended decode signal of aen[7] to be set.
 
-1. Fork this repository
-2. Complete the design of all the modules with the provided boilerplate code with your own creativity
-3. Verify all modules thoroughly as per the assignment requirements
-4. Replace this README file in your fork with your own detailed README that includes:
-    - Design approach and architectural decisions
-    - Architectural diagrams (wherever required)
-    - Simulation waveforms
-    - Any assumptions or design trade-offs made
-5. Do not use AI tools to generate your README file. The documentation should reflect your own understanding and explanation of the work.
+3. Identify the fundamental CDC design mistake illustrated in this figure.
 
+ The fundamental CDC mistake in the given design is not taking into the account the importance of synchronization of multi-bit signals in the receiving clock domain. The design overlooks the differences that can arise when multiple bits in a signal are passed to a different clock domain each with their own individual synchronizers. The slight differences that can arise in this setup(due to factors given in Q1) can cause data incoherency as illegal or unintended intermediate signals are formed at the destination. It is important that only one bit signals or properly encoded signals(such as gray code where multiple bits do not change in transition) are passed through synchronizers.
 
-All the best!
+4. Propose three different design techniques that can be used to safely transfer this control information across clock domains without generating spurious decoded outputs.
+
+ Three techniques that can be used to safely transfer this multi bit control information across clock domains without generating spurious decoded outputs are as follows:
+    1.Mux recirculation :
+    A one bit control signal is synchronized to receiving clock domain using a valid single bit synchronization technique such as 2-flip flop synchronizer or toggle synchronizer. When the control signal is asserted the multi bit data signal is made stable and unchanging , the control signal is then synchronized to receiving clock domain after which point all the bits in the multi bit signal is sampled simultaneously .A mux is present in destination which selects the new data when the control bit is toggled ,else it keeps the previous data. The designer has to make sure that the multi bit data is not modified during the time period between the control bit being asserted and sent to the destination clock domain until the entire data is captured at receiving clock.Hence, this technique is useful when data is not changing frequently in source domain. 
+
+    2.Handshake protocol :
+    An improvement over the single bit control technique used in previous point is the use of valid/acknowledge handshaking signals which can  make the setup more robust. The source flip flop launches the valid control signal bit which is synchronized to receiving clock domain using a single bit synchronizer such as a 2-flip flop synchronizer .When valid is detected , the receiving clock starts the sampling the stable multi bit data. After the sampling ,the domain sends back acknowledge signal back to source .This process can be repeated to ensure safe exchange of data .
+
+    3.Asynchronous FIFO :
+    An asynchronous FIFO consists of a small shared memory where data from source is stored. It uses a read and write pointer to read from this memory by destination and write to this memory by source domain respectively.The pointers are incremented as to when data is read from or written to FIFO. The key idea is that the data doesn't cross the clock domains, only the pointers do. There is a mechanism to check whether the FIFO is full or empty. The destination should not read from the FIFO when it is empty and the source should not write to it when it is full. Another important consideration here is how the two pointers are implemented .Since they will be have to pass through the clock domain, using binary encoding for this can cause problems as multi bit binary transitions can cause more than one bit to change in transition ,hence , we are back to the problem of synchronizing multi bit values across the two clocks. The solution to this is to use gray code encoding for pointers .When a gray code value is incremented , only a single bit change happens in it. Hence, this becomes a single bit synchronization problem which can solved using any of our single bit synchronization techniques. 
+
+## Part B : Designing data-processing block
