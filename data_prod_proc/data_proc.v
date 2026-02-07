@@ -64,7 +64,7 @@ always @(*) begin
     next_state = state;
     case (state)
         IDLE: begin
-            if (start && VALID_IN) begin
+            if (start) begin
                 next_state = PROCESS;
             end
         end
