@@ -50,7 +50,6 @@ end
 always @(posedge rd_clk or negedge rd_rst_n) begin
     if (!rd_rst_n) begin
         rd_ptr_bin <= 0;
-        rd_data <= 0;
     end else if (rd_en && !empty) begin
         rd_ptr_bin <= rd_ptr_bin + 1;
     end
