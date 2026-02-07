@@ -6,14 +6,14 @@ module async_fifo #(
     input wr_clk,
     input wr_rst_n,
     input wr_en,
-    input [DATA_WIDTH-1] wr_data,
+    input [DATA_WIDTH-1:0] wr_data,
     output full,
 
     input rd_clk,
     input rd_rst_n,
     input rd_en,
-    input [DATA_WIDTH-1] rd_data,
-    output empty, 
+    output [DATA_WIDTH-1:0] rd_data,
+    output empty
 );
 
 reg [DATA_WIDTH-1:0] mem [0:DEPTH-1]; //Dual port ram to store pixels

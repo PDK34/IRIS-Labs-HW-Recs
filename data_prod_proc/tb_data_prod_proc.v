@@ -27,9 +27,12 @@ module tb_data_prod_proc;
             sensor_reset_cnt <= sensor_reset_cnt + 1'b1;
     end
 
-    wire [7:0] pixel;
-    wire valid;
-    wire ready;
+    wire [7:0] pixel_from_prod;
+    wire valid_from_prod;
+
+    wire fifo_full,fifo_empty;
+    wire [7:0] pixel_from_fifo;
+
 
 
 	// Processor output and control signals
@@ -37,32 +40,51 @@ module tb_data_prod_proc;
     wire valid_out;
     reg [1:0] mode;
     reg start;
+    wire ready_to_fifo;
     
     //Debug signals
     integer output_file;
     integer pixel_count;
 
+	data_prod data_producer (
+        .sensor_clk(sensor_clk),
+        .rst_n(sensor_resetn),
+        .ready(!fifo_full),
+        .pixel(pixel_from_prod),
+        .valid(valid_from_prod)
+	);    
+
+    async_fifo #(
+        .DATA_WIDTH(8),
+        .DEPTH(32)
+    ) fifo(
+        .wr_clk(sensor_clk), //Input clock and other signals from and to producer
+        .wr_rst_n(sensor_resetn),
+        .wr_en(valid_from_prod&& !fifo_full),
+        .wr_data(pixel_from_prod),
+        .full(fifo_full),
+
+        .rd_clk(clk), //Input clock and other signals from and to processing block
+        .rd_rst_n(resetn),
+        .rd_en(ready_to_fifo && !fifo_empty),
+        .rd_data(pixel_from_fifo),
+        .empty(fifo_empty)
+    );
 
 	data_proc data_processing (
         .clk(clk),
         .rstn(resetn),
-        .pixel_in(pixel),
+        .pixel_in(pixel_from_fifo),
         .pixel_out(pixel_out),
-        .VALID_IN(valid),
-        .READY_OUT(ready),
+        .VALID_IN(!fifo_empty),
+        .READY_OUT(ready_to_fifo),
         .VALID_OUT(valid_out),
         .READY_IN(1'b1),//set always ready to accept output
         .mode(mode),
         .start(start)
 	);
 
-	data_prod data_producer (
-        .sensor_clk(sensor_clk),
-        .rst_n(sensor_resetn),
-        .ready(ready),
-        .pixel(pixel),
-        .valid(valid)
-	);
+
 
     always @(posedge clk) begin //Write output pixels to file for debugging purpose
     if (resetn && valid_out && pixel_count < 1024) begin
