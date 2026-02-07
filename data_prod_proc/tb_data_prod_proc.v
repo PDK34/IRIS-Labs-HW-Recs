@@ -114,7 +114,7 @@ module tb_data_prod_proc;
         start = 1;
         #1000;     
         if (valid_out == 0) begin
-            $display("Mode 11 correctly produces no output");
+            $display("Mode 1'b11 correctly produces no output");
         end else begin
             $display("ERROR: Mode 1'b11 is not valid!");
         end  
