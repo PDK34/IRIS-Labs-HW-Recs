@@ -1,7 +1,7 @@
 from PIL import Image
 
-# Convert any image to 32x32 grayscale hex
-img = Image.open('your_image.jpg').convert('L').resize((32, 32))
+# Convert image to 32x32 grayscale hex
+img = Image.open('bird.jpg').convert('L').resize((32, 32))
 pixels = list(img.getdata())
 
 with open('image.hex', 'w') as f:
