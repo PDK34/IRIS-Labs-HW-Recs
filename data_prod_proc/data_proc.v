@@ -30,7 +30,7 @@ mode[1:0]:
 
 parameter IMG_WIDTH = 32;
 
-// State machine
+// States for the FSM
 reg [1:0] state, next_state;
 localparam [1:0] IDLE = 2'b00,
                  PROCESS = 2'b01;
@@ -44,10 +44,10 @@ reg [7:0] line_buffer_2 [0:IMG_WIDTH-1];
 integer i;
 reg [1:0] row_count;
 reg [$clog2(IMG_WIDTH)-1:0] col_count;
-reg [15:0] conv_sum;
-reg [7:0] conv_result;
+reg [11:0] conv_sum;
+reg [8:0] conv_result;
 
-// Ready_Out only set when in PROCESS state and (no pending outputs or output consumed)
+// Ready_Out only set when in PROCESS state and (no valid pending outputs(VALID_OUT == 0) or output consumed(READY_IN ==1))
 assign READY_OUT = (state == PROCESS) && (!VALID_OUT || READY_IN);
 
 // Sequential state register logic
@@ -59,7 +59,7 @@ always @(posedge clk) begin
     end
 end
 
-// Next state logic (combinational)
+// Next state logic 
 always @(*) begin
     next_state = state;
     case (state)
@@ -159,9 +159,9 @@ always @(posedge clk) begin
                                 conv_sum = conv_sum + {8'h0, line_buffer_0[(col_count+1) % IMG_WIDTH]};
                                 
                                 // Divide by 8 (approximates divide by 9, so to minimize hardware complexity)
-                                conv_result = conv_sum[10:3];
+                                conv_result = conv_sum >> 3;
                                 
-                                pixel_out <= conv_result;
+                                pixel_out <= (conv_result > 255) ? 8'hFF : conv_result[7:0];  //If convolution result exceed 8-bit, use max 8-bit value for that output pixel
                                 VALID_OUT <= 1'b1;
                             end else begin
                                 VALID_OUT <= 1'b0;

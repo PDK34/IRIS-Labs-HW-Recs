@@ -1,6 +1,6 @@
 `timescale 1ns/1ps
 
-module data_producer #(
+module data_prod #(
     parameter IMAGE_SIZE = 1024
 )(
     input sensor_clk,
