@@ -1,3 +1,5 @@
+`timescale 1ns/1ps
+
 module async_fifo #(
     parameter DATA_WIDTH = 8,
     parameter DEPTH = 32,
@@ -44,19 +46,17 @@ always @(posedge wr_clk or negedge wr_rst_n) begin
     end
 end
     
-reg [DATA_WIDTH-1:0] rd_data_reg;
     
 always @(posedge rd_clk or negedge rd_rst_n) begin
     if (!rd_rst_n) begin
         rd_ptr_bin <= 0;
-        rd_data_reg <= 0;
+        rd_data <= 0;
     end else if (rd_en && !empty) begin
-        rd_data_reg <= mem[rd_ptr_bin[ADDR_WIDTH-1:0]];
         rd_ptr_bin <= rd_ptr_bin + 1;
     end
 end
     
-assign rd_data = rd_data_reg;
+assign rd_data = mem[rd_ptr_bin[ADDR_WIDTH-1:0]];
 
 always @(posedge rd_clk or negedge rd_rst_n) begin
     if (!rd_rst_n) begin
