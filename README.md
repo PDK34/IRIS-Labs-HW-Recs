@@ -65,3 +65,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
   </tr>
 </table>
 
+
+<img src="./data_prod_proc/Mode3_simulation_result.jpg" alt="Mode 3 tb output" width="50%" />
+
+ No valid output in mode 3
