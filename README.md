@@ -45,22 +45,22 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 <table style="width:100%">
   <tr>
     <td align="center" style="width:20%">
-      <img src="./data_prod_proc/Original_checkerboard.jpg" width="75%" />
+      <img src="./data_prod_proc/Original_checkerboard.jpg" width="85%" />
       <br />
       <b>Original</b>
     </td>
     <td align="center" style="width:20%">
-      <img src="./data_prod_proc/bypass_checkerboard.jpg" width="75%" />
+      <img src="./data_prod_proc/bypass_checkerboard.jpg" width="85%" />
       <br />
       <b>Bypass</b>
     </td>
     <td align="center" style="width:20%">
-      <img src="./data_prod_proc/invert_checkerboard.jpg" width="75%" />
+      <img src="./data_prod_proc/invert_checkerboard.jpg" width="85%" />
       <br />
       <b>Inverted</b>
     </td>
     <td align="center" style="width:20%">
-      <img src="./data_prod_proc/conv_checkerboard.jpg" width="75%" />
+      <img src="./data_prod_proc/conv_checkerboard.jpg" width="85%" />
       <br />
       <b>Convoluted</b>
     </td>
