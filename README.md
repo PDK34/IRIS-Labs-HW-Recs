@@ -38,7 +38,9 @@ Initially , I have Implemented data processing logic in data_proc.v file before 
 Since the producing and processing clocks are in different clock domains, synchronization is needed to resolve the pixel data loss from producer to processor . Asynchronous fifo with gray coded pointers are chosen for this purpose .The gray coded pointers are synchronized across the two domains using a 2 flip flop synchronizer .The FIFO acts as the interface between the producing block and processing block ,keeping track of pixels coming in from producer and storing them in buffer and later letting the processing block access it. This is important since the producer is running on a faster clock than processing module, and as such there would be data loss from producer to processor if there was not a FIFO buffer to store the pixels coming in at a faster rate and giving enough time to the processing module to access the pixel values in it's clock domain.
 
 ### Testbench validation: 
-For validating the testbench , i've used a sample checkerboard 32x32 image(original_checkerboard.jpg) in it's hex format(image.hex). The testbench is updated with required signals and instantiations .All the 3 modes are tested and for the fourth mode value(1'b11) ,a display message is produced to show that no valid outputs are produced here. For the three valid modes, a separate hex value is given as output after the required operations are done on the pixels: output_bypass.hex,output_invert.hex and output_conv.hex. A python script(hex_to_image) is used to convert these output hex files and the original hex file back to jpg format so that final results can be validated .
+For validating the testbench , i've used a sample checkerboard 32x32 image(original_checkerboard.jpg) in it's hex format(image.hex). The testbench is updated with required signals and instantiations .All the 3 modes are tested and for the fourth mode value(1'b11) ,a display message is produced to show that no valid outputs are produced here. For the three valid modes, a separate hex value is given as output after the required operations are done on the pixels: output_bypass.hex,output_invert.hex and output_conv.hex. There was an issue with output files other than bypass.hex ,losing some of the initial pixel values in output hex files. To deal with that, a task flush_fifo_and_reset is designed to reset the fifo , producer and processor blocks in between going to next mode after testing precious mode. It is called between testing every mode in testbench .
+
+ A python script(hex_to_image) is used to convert these output hex files and the original hex file back to jpg format so that final results can be validated .
 
 <table style="width:100%">
   <tr>
@@ -69,3 +71,24 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 <img src="./data_prod_proc/Mode3_simulation_result.jpg" alt="Mode 3 tb output" width="50%" />
 
  No valid output in mode 3
+
+### Design choices
+
+- For the streaming interface ,a way two handshake protocol is established between all the modules .This is much more robust than a one-way handshake interface which will not have READY signal from consumer and as such the lack of this backpressure , can cause data loss if producer sends data to the consumer module when the consumer is still processing previous data and is not ready to accept new data .A higher phase handshake like a 4-way one can be more robust but it comes at the cost of higher complexity and more latenccy. As such ,I chose a two way VALID/READY interface which is a good compromise between the two. 
+
+- An asynchronous FIFO with gray coded pointers have been chosen to deal with CDC issue. Since the sender(data producing block) has a higher frequency than the processing block, a buffer is needed to store the pixels coming at a faster rate from producer .The FIFO helps to deal with this issue and prevent data loss .It is comparatively a better alternative than a handshake protocol which will have a higher latency and doesn't allow for continuous data flow like a FIFO.
+
+- As mentioned above ,a line buffer has been implemented to deal with convolution that helps improves memory efficency as only three rows of image have to be stored at a time rather than the entire image .This is especially important when it comes to FPGA implementations as they have limited BRAM and SDRAM .The use of external memory require complex interfaces and higher cost barriers.
+
+### Diagrams
+- Architectural diagram
+
+<img src="./data_prod_proc/arch_diagram.jpeg" alt="arch diagram" width="30%" />
+
+- State transition of processing block
+
+<img src="./data_prod_proc/state_diagram.jpeg" alt="state diagram" width="25%" />
+
+-Ready/Valid Streaming interface
+
+<img src="./data_prod_proc/Stream_interface.jpeg" alt="stream" width="40%" />
