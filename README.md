@@ -40,7 +40,7 @@ Since the producing and processing clocks are in different clock domains, synchr
 ### Testbench validation: 
 For validating the testbench , i've used a sample checkerboard 32x32 image(original_checkerboard.jpg) in it's hex format(image.hex). The testbench is updated with required signals and instantiations .All the 3 modes are tested and for the fourth mode value(1'b11) ,a display message is produced to show that no valid outputs are produced here. For the three valid modes, a separate hex value is given as output after the required operations are done on the pixels: output_bypass.hex,output_invert.hex and output_conv.hex. There was an issue with output files other than bypass.hex ,losing some of the initial pixel values in output hex files. To deal with that, a task flush_fifo_and_reset is designed to reset the fifo , producer and processor blocks in between going to next mode after testing precious mode. It is called between testing every mode in testbench .
 
- A python script(hex_to_image) is used to convert these output hex files and the original hex file back to jpg format so that final results can be validated .
+ A python script(hex_to_image.py) is used to convert these output hex files and the original hex file back to jpg format so that final results can be validated .
 
 <table style="width:100%">
   <tr>
@@ -70,7 +70,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 <img src="./data_prod_proc/Mode3_simulation_result.jpg" alt="Mode 3 tb output" width="50%" />
 
- Simulation result in console verifying the absence of valid output in mode 3
+ Simulation result in console verifying the absence of valid output in mode 3.
 
 ### Design choices:
 
@@ -78,7 +78,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 - An asynchronous FIFO with gray coded pointers have been chosen to deal with CDC issue. Since the sender(data producing block) has a higher frequency than the processing block, a buffer is needed to store the pixels coming at a faster rate from producer .The FIFO helps to deal with this issue and prevent data loss .It is comparatively a better alternative than a handshake protocol which will have a higher latency and doesn't allow for continuous data flow like a FIFO.
 
-- As mentioned above ,a line buffer has been implemented to deal with convolution that helps improves memory efficency as only three rows of image have to be stored at a time rather than the entire image .This is especially important when it comes to FPGA implementations as they have limited BRAM and SDRAM .The use of external memory require complex interfaces and higher cost barriers.
+- As mentioned above ,a line buffer has been implemented to deal with convolution that helps improves memory efficiency as only three rows of image have to be stored at a time rather than the entire image .This is especially important when it comes to FPGA implementations as they have limited BRAM and SDRAM .The use of external memory require complex interfaces and higher cost barriers.
 
 ### Diagrams:
 - Architectural diagram
