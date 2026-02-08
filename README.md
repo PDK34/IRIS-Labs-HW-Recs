@@ -97,4 +97,3 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 ### Register map defined to integrate our data processing block to the soc:
 
-
