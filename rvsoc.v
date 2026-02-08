@@ -89,13 +89,18 @@ module rvsoc (
 	wire [31:0] simpleuart_reg_dat_do;
 	wire        simpleuart_reg_dat_wait;
 
+	wire dataproc_ready; //New signals for processor 
+	wire [31:0] dataproc_rdata;
+
+
 	assign mem_ready =
     (iomem_valid && iomem_ready) ||
     spimem_ready ||
     ram_ready ||
     spimemio_cfgreg_sel ||
     simpleuart_reg_div_sel ||
-    (simpleuart_reg_dat_sel && !simpleuart_reg_dat_wait);
+    (simpleuart_reg_dat_sel && !simpleuart_reg_dat_wait)||
+	dataproc_ready;
 
 	assign mem_rdata =
     (iomem_valid && iomem_ready) ? iomem_rdata :
@@ -104,6 +109,7 @@ module rvsoc (
     spimemio_cfgreg_sel         ? spimemio_cfgreg_do :
     simpleuart_reg_div_sel      ? simpleuart_reg_div_do :
     simpleuart_reg_dat_sel      ? simpleuart_reg_dat_do :
+	dataproc_ready              ? dataproc_rdata :  
     32'h0;
 
 	picorv32 #(
@@ -181,6 +187,18 @@ module rvsoc (
 	);
 
 	// Instantiate your data-processing-producing combined module here
+	dataproc_producer_wrapper #(
+    .IMAGE_SIZE(1024)
+	) data_processor (
+		.clk(clk),                
+		.resetn(resetn),
+		.mem_valid(mem_valid),
+		.mem_ready(dataproc_ready),
+		.mem_wstrb(mem_wstrb),
+		.mem_addr(mem_addr),
+		.mem_wdata(mem_wdata),
+		.mem_rdata(dataproc_rdata)
+	);
 
 
 	//----------------------------------------------------------------

@@ -9,7 +9,7 @@ Register Map:
 */
 `timescale 1ns/1ps
 
-module dataproc_producer_wrapper (
+module data_proc_wrapper (
     input clk,
     input resetn,
     
