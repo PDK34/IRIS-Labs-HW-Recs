@@ -107,34 +107,42 @@ module tb_data_prod_proc;
             end
         end
     end
-    /*Task to flush fifo outputs and reset producer in between testing different
-     modes ,helping with initial pixel loss in modes which are tested later
+    /*Task to flush fifo outputs and reset producer adn processor in between testing different
+     modes ,dealing with initial pixel loss in modes which are tested later
     */
-    task flush_fifo_and_reset_producer;  
-        integer flush_count;
-        begin
-            $display(" Flushing FIFO...");
-            producer_enable = 0;  //Stop producer
-            start = 0; //Stop processor
-            //Drain FIFO
-            flush_count = 0;
-            while (!fifo_empty && flush_count < 100) begin
-                @(posedge clk);
-                flush_count = flush_count + 1;
-            end 
-            force_sensor_reset = 1'b1;
-            repeat(10) @(posedge sensor_clk);
-            
-            // Release reset
-            force_sensor_reset = 1'b0;
-            
-            // Wait for sensor domain to come out of reset
-            while (!sensor_resetn) @(posedge sensor_clk);
-            repeat(10) @(posedge sensor_clk); 
-            //Wait for some time
-            repeat(10) @(posedge clk);
-        end
-    endtask
+    task flush_fifo_and_reset;  
+    integer flush_count;
+    begin
+        $display(" Flushing FIFO and Resetting Processor and producer");
+        producer_enable = 0;
+        start = 0;
+        
+        //Drain the FIFO
+        flush_count = 0;
+        while (!fifo_empty && flush_count < 100) begin
+            @(posedge clk);
+            flush_count = flush_count + 1;
+        end 
+
+        //Reset the producer
+        force_sensor_reset = 1'b1;
+        repeat(5) @(posedge sensor_clk);
+
+        //Reset processor 
+        // force the reset_cnt to 0 to trigger wire resetn = &reset_cnt;
+        reset_cnt = 0; 
+        repeat(5) @(posedge clk);
+        
+        //Release resets
+        force_sensor_reset = 1'b0;
+        
+        // Wait for resets to clear 
+        wait(resetn == 1); 
+        wait(sensor_resetn == 1);
+        
+        repeat(10) @(posedge clk);
+    end
+endtask
 
 
     initial begin
@@ -162,7 +170,7 @@ module tb_data_prod_proc;
         wait(pixel_count >= 1024);
         #100;     
        $fclose(output_file);
-       flush_fifo_and_reset_producer();
+       flush_fifo_and_reset();
         start = 0;
         #300;
 
@@ -176,7 +184,7 @@ module tb_data_prod_proc;
         wait(pixel_count >= 1024);
         #100;      
         $fclose(output_file);
-        flush_fifo_and_reset_producer();
+        flush_fifo_and_reset();
         start = 0;
         #200;
 
@@ -190,7 +198,7 @@ module tb_data_prod_proc;
         wait(pixel_count >= 1024);
         #1000;      
         $fclose(output_file);
-        flush_fifo_and_reset_producer();
+        flush_fifo_and_reset();
         start = 0;
         #200;
 
@@ -205,7 +213,7 @@ module tb_data_prod_proc;
         end else begin
             $display("ERROR: Mode 1'b11 is not valid!");
         end  
-        flush_fifo_and_reset_producer();
+        flush_fifo_and_reset();
         start = 0;
         #200;
 
