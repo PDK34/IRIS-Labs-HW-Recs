@@ -18,8 +18,8 @@ module async_fifo #(
     output empty
 );
 
-reg [DATA_WIDTH-1:0] mem [0:DEPTH-1]; //Dual port ram to store pixels
-//Binary pointer for read and write - One extra bit to identify fifo full condition 
+reg [DATA_WIDTH-1:0] mem [0:DEPTH-1]; //Dual port ram to store pixel values
+//Binary pointer for read and write , One extra bit to identify fifo full/empty condition making use of wrap around condition
 reg [ADDR_WIDTH:0] wr_ptr_bin;
 reg [ADDR_WIDTH:0] rd_ptr_bin;
 //Gray encoded pointer for write and read
@@ -36,6 +36,7 @@ reg [ADDR_WIDTH:0] rd_ptr_gray_sync1, rd_ptr_gray_sync2;
 assign full = (wr_ptr_gray == {~rd_ptr_gray_sync2[ADDR_WIDTH:ADDR_WIDTH-1],rd_ptr_gray_sync2[ADDR_WIDTH-2:0]});
 assign empty = (rd_ptr_gray == wr_ptr_gray_sync2);
 
+reg [DATA_WIDTH-1:0] rd_data_reg; //Registered read output 
 
 always @(posedge wr_clk or negedge wr_rst_n) begin
     if (!wr_rst_n) begin
@@ -51,12 +52,14 @@ always @(posedge rd_clk or negedge rd_rst_n) begin
     if (!rd_rst_n) begin
         rd_ptr_bin <= 0;
     end else if (rd_en && !empty) begin
+        rd_data_reg <= mem[rd_ptr_bin[ADDR_WIDTH-1:0]];
         rd_ptr_bin <= rd_ptr_bin + 1;
     end
 end
     
-assign rd_data = mem[rd_ptr_bin[ADDR_WIDTH-1:0]];
+assign rd_data = rd_data_reg;
 
+//Two flip flop synchronizers for both read and write gray pointers 
 always @(posedge rd_clk or negedge rd_rst_n) begin
     if (!rd_rst_n) begin
         wr_ptr_gray_sync1 <= 0;
