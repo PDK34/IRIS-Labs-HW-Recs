@@ -70,7 +70,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 <img src="./data_prod_proc/Mode3_simulation_result.jpg" alt="Mode 3 tb output" width="50%" />
 
- No valid output in mode 3
+ Simulation result in console veryfying the absence of valid output in mode 3
 
 ### Design choices
 
@@ -89,6 +89,6 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 <img src="./data_prod_proc/state_diagram.jpeg" alt="state diagram" width="25%" />
 
--Ready/Valid Streaming interface
+- Ready/Valid Streaming interface
 
 <img src="./data_prod_proc/Stream_interface.jpeg" alt="stream" width="40%" />
