@@ -70,9 +70,9 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 <img src="./data_prod_proc/Mode3_simulation_result.jpg" alt="Mode 3 tb output" width="50%" />
 
- Simulation result in console veryfying the absence of valid output in mode 3
+ Simulation result in console verifying the absence of valid output in mode 3
 
-### Design choices
+### Design choices:
 
 - For the streaming interface ,a way two handshake protocol is established between all the modules .This is much more robust than a one-way handshake interface which will not have READY signal from consumer and as such the lack of this backpressure , can cause data loss if producer sends data to the consumer module when the consumer is still processing previous data and is not ready to accept new data .A higher phase handshake like a 4-way one can be more robust but it comes at the cost of higher complexity and more latenccy. As such ,I chose a two way VALID/READY interface which is a good compromise between the two. 
 
@@ -80,7 +80,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 - As mentioned above ,a line buffer has been implemented to deal with convolution that helps improves memory efficency as only three rows of image have to be stored at a time rather than the entire image .This is especially important when it comes to FPGA implementations as they have limited BRAM and SDRAM .The use of external memory require complex interfaces and higher cost barriers.
 
-### Diagrams
+### Diagrams:
 - Architectural diagram
 
 <img src="./data_prod_proc/arch_diagram.jpeg" alt="arch diagram" width="30%" />
@@ -92,3 +92,5 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 - Ready/Valid Streaming interface
 
 <img src="./data_prod_proc/Stream_interface.jpeg" alt="stream" width="40%" />
+
+## Part C : Integrating with RISC-V SoC
