@@ -94,3 +94,7 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 <img src="./data_prod_proc/Stream_interface.jpeg" alt="stream" width="40%" />
 
 ## Part C : Integrating with RISC-V SoC
+
+### Register map defined to integrate our data processing block to the soc:
+
+
