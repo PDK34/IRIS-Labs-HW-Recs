@@ -99,8 +99,9 @@ $(VIVADO_SCRIPT): $(RTL_SRCS) $(TESTBENCH)
 	@echo "add_files -fileset sim_1 $(TESTBENCH)" >> $@
 	@echo "set_property top dataproc_tb [get_filesets sim_1]" >> $@
 	@echo "# Copy hex files to simulation directory" >> $@
-	@echo "file copy -force ../firmware.hex [get_property DIRECTORY [current_project]]/firmware.hex" >> $@
-	@echo "file copy -force ../image.hex [get_property DIRECTORY [current_project]]/image.hex" >> $@
+	@echo "set proj_dir [get_property DIRECTORY [current_project]]" >> $@
+	@echo "file copy -force [file normalize \$$proj_dir/../../firmware.hex] \$$proj_dir/firmware.hex" >> $@
+	@echo "file copy -force [file normalize \$$proj_dir/../../image.hex] \$$proj_dir/image.hex" >> $@
 	@echo "launch_simulation" >> $@
 	@echo "run all" >> $@
 	@echo "close_sim" >> $@

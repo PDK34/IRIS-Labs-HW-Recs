@@ -1,0 +1,44 @@
+#-----------------------------------------------------------
+# Vivado v2025.1.1 (64-bit)
+# SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
+# IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
+# SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
+# Start of session at: Mon Feb  9 19:41:21 2026
+# Process ID         : 1184
+# Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
+# Command line       : vivado.exe -mode batch -source run_sim.tcl
+# Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
+# Journal file       : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv\vivado.jou
+# Running On         : rathSha
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 5 5600H with Radeon Graphics         
+# CPU Frequency      : 3294 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 7883 MB
+# Swap memory        : 14582 MB
+# Total Virtual      : 22466 MB
+# Available Virtual  : 4122 MB
+#-----------------------------------------------------------
+source run_sim.tcl
+# create_project rvsoc_sim sim_output -part xc7a35tcpg236-1 -force
+create_project: Time (s): cpu = 00:00:18 ; elapsed = 00:00:13 . Memory (MB): peak = 494.988 ; gain = 214.332
+# set_property simulator_language Verilog [current_project]
+# add_files ../rvsoc.v
+# add_files ../rvsoc_wrapper.v
+# add_files ../picorv32.v
+# add_files ../simpleuart.v
+# add_files ../spimemio.v
+# add_files ../spiflash.v
+# add_files data_proc_wrapper.v
+# add_files data_proc.v
+# add_files data_prod.v
+# add_files -fileset sim_1 dataproc_tb.v
+# set_property top dataproc_tb [get_filesets sim_1]
+# file copy -force ../firmware.hex [get_property DIRECTORY [current_project]]/firmware.hex
+error copying "../firmware.hex": no such file or directory
+    while executing
+"file copy -force ../firmware.hex [get_property DIRECTORY [current_project]]/firmware.hex"
+    (file "run_sim.tcl" line 16)
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 19:41:39 2026...
