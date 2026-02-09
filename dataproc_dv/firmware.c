@@ -12,8 +12,21 @@
 
 /*---------------------------------------------------------------------------------*/
 
-void putchar(char c);
+void uart_putc(char c);
 void print(const char *p);
+//utility fn
+void print_hex(uint8_t val) {
+    const char hex[] = "0123456789ABCDEF";
+    uart_putc(hex[val >> 4]);
+    uart_putc(hex[val & 0xF]);
+}
+
+void print_hex32(uint32_t val) {
+    print_hex((val >> 24) & 0xFF);
+    print_hex((val >> 16) & 0xFF);
+    print_hex((val >> 8) & 0xFF);
+    print_hex(val & 0xFF);
+}
 
 
 void main()
@@ -117,29 +130,16 @@ void main()
     while (1);
 }
 
-void putchar(char c)
+void uart_putc(char c)
 {
 	if (c == '\n')
-		putchar('\r');
+		uart_putc('\r');
 	reg_uart_data = c;
 }
 
 void print(const char *p)
 {
 	while (*p)
-		putchar(*(p++));
+		uart_putc(*(p++));
 }
 
-//utility fn
-void print_hex(uint8_t val) {
-    const char hex[] = "0123456789ABCDEF";
-    putchar(hex[val >> 4]);
-    putchar(hex[val & 0xF]);
-}
-
-void print_hex32(uint32_t val) {
-    print_hex((val >> 24) & 0xFF);
-    print_hex((val >> 16) & 0xFF);
-    print_hex((val >> 8) & 0xFF);
-    print_hex(val & 0xFF);
-}
