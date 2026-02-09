@@ -103,11 +103,15 @@ $(VIVADO_SCRIPT): $(RTL_SRCS) $(TESTBENCH)
 	@echo "add_files -fileset sim_1 -norecurse \$$script_dir/firmware.hex" >> $@
 	@echo "add_files -fileset sim_1 -norecurse \$$script_dir/image.hex" >> $@
 	@echo "launch_simulation" >> $@
+	@echo "# Add all signals to waveform" >> $@
+	@echo "add_wave {{/*}}" >> $@
+	@echo "# Run simulation" >> $@
 	@echo "run all" >> $@
 	@echo "close_sim" >> $@
 	@echo "close_project" >> $@
 	@echo "exit" >> $@
 	@echo "Created $@"
+
 # Run Vivado simulation
 simulate: setup_sim $(FIRMWARE_HEX) image.hex
 	@echo "Running Vivado simulation..."
