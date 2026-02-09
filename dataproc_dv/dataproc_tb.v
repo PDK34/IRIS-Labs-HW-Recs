@@ -26,7 +26,11 @@ module dataproc_tb;
 
 	/* Write your tb logic for your dataprocessing module here */
 
-
+always @(posedge clk) begin
+    if (uut.soc.mem_valid && uut.soc.mem_addr == 32'h02001000) begin
+        $display("HW DEBUG: CPU wrote to DATAPROC_CONTROL with value %h", uut.soc.mem_wdata);
+    end
+end
 
 
 
