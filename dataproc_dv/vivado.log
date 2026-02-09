@@ -1,0 +1,531 @@
+#-----------------------------------------------------------
+# Vivado v2025.1.1 (64-bit)
+# SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
+# IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
+# SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
+# Start of session at: Mon Feb  9 20:11:46 2026
+# Process ID         : 12268
+# Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
+# Command line       : vivado.exe -mode batch -source run_sim.tcl
+# Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
+# Journal file       : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv\vivado.jou
+# Running On         : rathSha
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : AMD Ryzen 5 5600H with Radeon Graphics         
+# CPU Frequency      : 3294 MHz
+# CPU Physical cores : 6
+# CPU Logical cores  : 12
+# Host memory        : 7883 MB
+# Swap memory        : 14582 MB
+# Total Virtual      : 22466 MB
+# Available Virtual  : 5875 MB
+#-----------------------------------------------------------
+source run_sim.tcl
+# create_project rvsoc_sim sim_output -part xc7a35tcpg236-1 -force
+create_project: Time (s): cpu = 00:00:19 ; elapsed = 00:00:13 . Memory (MB): peak = 496.801 ; gain = 216.922
+# set_property simulator_language Verilog [current_project]
+# add_files ../rvsoc.v
+# add_files ../rvsoc_wrapper.v
+# add_files ../picorv32.v
+# add_files ../simpleuart.v
+# add_files ../spimemio.v
+# add_files ../spiflash.v
+# add_files data_proc_wrapper.v
+# add_files data_proc.v
+# add_files data_prod.v
+# add_files -fileset sim_1 dataproc_tb.v
+# set_property top dataproc_tb [get_filesets sim_1]
+# set script_dir [file dirname [file normalize [info script]]]
+# add_files -fileset sim_1 -norecurse $script_dir/firmware.hex
+# add_files -fileset sim_1 -norecurse $script_dir/image.hex
+# launch_simulation
+Command: launch_simulation 
+INFO: [Vivado 12-12493] Simulation top is 'dataproc_tb'
+INFO: [Vivado 12-5682] Launching behavioral simulation in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
+INFO: [SIM-utils-51] Simulation object is 'sim_1'
+INFO: [SIM-utils-72] Using boost library from 'C:/Xilinx/2025.1.1/Vivado/tps/boost_1_72_0'
+INFO: [SIM-utils-54] Inspecting design source files for 'dataproc_tb' in fileset 'sim_1'...
+INFO: [SIM-utils-43] Exported 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim/firmware.hex'
+INFO: [SIM-utils-43] Exported 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim/image.hex'
+INFO: [USF-XSim-97] Finding global include files...
+INFO: [USF-XSim-98] Fetching design files from 'sim_1'...
+INFO: [USF-XSim-2] XSim::Compile design
+INFO: [USF-XSim-61] Executing 'COMPILE and ANALYZE' step in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
+"xvlog --incr --relax -prj dataproc_tb_vlog.prj"
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_proc
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_proc_wrapper
+WARNING: [VRFC 10-3380] identifier 'proc_ready_in' is used before its declaration [C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc_wrapper.v:75]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_prod.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_prod
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/picorv32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module picorv32
+INFO: [VRFC 10-311] analyzing module picorv32_regs
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_fast_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_div
+INFO: [VRFC 10-311] analyzing module picorv32_axi
+INFO: [VRFC 10-311] analyzing module picorv32_axi_adapter
+INFO: [VRFC 10-311] analyzing module picorv32_wb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/rvsoc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rvsoc
+INFO: [VRFC 10-311] analyzing module soc_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/rvsoc_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rvsoc_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/simpleuart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module simpleuart
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/spiflash.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spiflash
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/spimemio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spimemio
+INFO: [VRFC 10-311] analyzing module spimemio_xfer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/dataproc_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dataproc_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
+INFO: [USF-XSim-3] XSim::Elaborate design
+INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
+"xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot dataproc_tb_behav xil_defaultlib.dataproc_tb xil_defaultlib.glbl -log elaborate.log"
+Vivado Simulator v2025.1.1
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/Xilinx/2025.1.1/Vivado/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot dataproc_tb_behav xil_defaultlib.dataproc_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.picorv32_pcpi_fast_mul
+Compiling module xil_defaultlib.picorv32(COMPRESSED_ISA=1'b1,ENA...
+Compiling module xil_defaultlib.spimemio_xfer
+Compiling module xil_defaultlib.spimemio
+Compiling module xil_defaultlib.simpleuart
+Compiling module xil_defaultlib.data_prod
+Compiling module xil_defaultlib.data_proc
+Compiling module xil_defaultlib.data_proc_wrapper
+Compiling module xil_defaultlib.soc_mem
+Compiling module xil_defaultlib.rvsoc(BARREL_SHIFTER=1'b0,ENABLE...
+Compiling module xil_defaultlib.rvsoc_wrapper(MEM_WORDS=256)
+Compiling module xil_defaultlib.spiflash
+Compiling module xil_defaultlib.dataproc_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot dataproc_tb_behav
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:09 . Memory (MB): peak = 500.406 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '9' seconds
+INFO: [USF-XSim-4] XSim::Simulate design
+INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
+INFO: [USF-XSim-98] *** Running xsim
+   with args "dataproc_tb_behav -key {Behavioral:sim_1:Functional:dataproc_tb} -tclbatch {dataproc_tb.tcl} -log {simulate.log}"
+INFO: [USF-XSim-8] Loading simulator feature
+Time resolution is 1 ps
+source dataproc_tb.tcl
+## set curr_wave [current_wave_config]
+## if { [string length $curr_wave] == 0 } {
+##   if { [llength [get_objects]] > 0} {
+##     add_wave /
+##     set_property needs_save false [current_wave_config]
+##   } else {
+##      send_msg_id Add_Wave-1 WARNING "No top level signals found. Simulator will start without a wave window. If you want to open a wave window go to 'File->New Waveform Configuration' or type 'create_wave_config' in the TCL console."
+##   }
+## }
+## run 1000ns
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 0
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 1
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 2
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 3
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 4
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 5
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 6
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 7
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 8
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 9
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 10
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 11
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 12
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 13
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 14
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 15
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 16
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 18
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 19
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 20
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 21
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 22
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 23
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 24
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 25
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 26
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 27
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 28
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 29
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 30
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 31
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 32
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 33
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 34
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 35
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 36
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 37
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 38
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 39
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 40
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 41
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 42
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 43
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 44
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 45
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 46
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 47
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 48
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 49
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 50
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 51
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 52
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 53
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 54
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 55
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 56
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 57
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 58
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 59
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 60
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 61
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 62
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 63
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 64
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 65
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 66
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 67
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 68
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 69
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 70
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 71
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 72
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 73
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 74
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 75
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 76
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 77
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 78
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 79
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 80
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 81
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 82
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 83
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 84
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 85
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 86
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 87
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 88
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 89
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 90
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 91
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 92
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 93
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 94
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 95
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 96
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 97
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 98
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 99
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 100
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 101
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 102
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 103
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 104
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 105
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 106
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 107
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 108
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 109
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 110
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 111
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 112
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 113
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 114
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 115
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 116
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 117
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 118
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 119
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 120
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 121
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 122
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 123
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 124
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 125
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 126
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 127
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 128
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 129
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 130
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 131
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 132
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 133
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 134
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 135
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 136
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 137
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 138
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 139
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 140
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 141
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 142
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 143
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 144
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 145
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 146
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 147
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 148
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 149
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 150
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 151
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 152
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 153
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 154
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 155
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 156
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 157
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 158
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 159
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 160
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 161
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 162
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 163
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 164
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 165
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 166
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 167
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 168
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 169
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 170
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 171
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 172
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 173
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 174
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 175
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 176
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 177
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 178
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 179
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 180
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 181
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 182
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 183
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 184
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 185
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 186
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 187
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 188
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 189
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 190
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 191
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 192
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 193
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 194
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 195
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 196
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 197
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 198
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 199
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 200
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 201
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 202
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 203
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 204
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 205
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 206
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 207
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 208
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 209
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 210
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 211
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 212
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 213
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 214
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 215
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 216
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 217
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 218
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 219
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 220
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 221
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 222
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 223
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 224
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 225
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 226
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 227
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 228
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 229
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 230
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 231
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 232
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 233
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 234
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 235
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 236
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 237
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 238
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 239
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 240
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 241
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 242
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 243
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 244
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 245
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 246
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 247
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 248
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 249
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 250
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 251
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 252
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 253
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 254
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 255
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 256
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 257
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 258
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 259
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 260
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 261
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 262
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 263
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 264
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 265
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 266
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 267
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 268
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 269
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 270
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 271
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 272
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 273
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 274
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 275
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 276
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 277
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 278
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 279
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 280
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 281
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 282
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 283
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 284
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 285
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 287
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 288
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 289
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 290
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 291
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 292
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 293
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 294
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 295
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 296
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 297
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 298
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 299
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 300
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 301
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 302
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 303
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 304
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 305
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 306
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 307
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 308
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 309
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 310
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 311
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 312
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 313
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 314
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 315
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 316
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 317
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 318
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 319
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 320
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 321
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 322
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 324
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 325
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 326
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 327
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 328
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 329
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 330
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 332
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 333
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 334
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 335
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 336
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 337
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 339
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 340
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 341
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 342
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 343
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 345
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 346
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 348
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 349
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 352
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 353
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 354
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 355
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 357
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 358
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 359
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 361
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 362
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 363
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 364
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 365
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 366
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 367
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 368
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 369
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 370
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 371
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 372
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 373
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 374
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 376
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 377
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 378
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 379
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 380
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 381
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 382
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 383
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 384
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 385
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 386
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 387
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 388
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 389
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 390
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 391
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 393
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 394
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 395
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 396
+WARNING: Data truncated while reading Datafile: firmware.hex, while loading at index: 397
+INFO: [USF-XSim-96] XSim completed. Design snapshot 'dataproc_tb_behav' loaded.
+INFO: [USF-XSim-97] XSim simulation ran for 1000ns
+launch_simulation: Time (s): cpu = 00:00:01 ; elapsed = 00:00:18 . Memory (MB): peak = 500.406 ; gain = 3.605
+# run all
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+run: Time (s): cpu = 00:00:02 ; elapsed = 00:00:15 . Memory (MB): peak = 500.406 ; gain = 0.000
+INFO: [Common 17-344] 'run' was cancelled
+INFO: [Common 17-344] 'source' was cancelled
+INFO: xsimkernel Simulation Memory Usage: 33236 KB (Peak: 33236 KB), Simulation CPU Usage: 15405 ms
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 20:12:39 2026...

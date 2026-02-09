@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-makehex.py - Convert binary file to hex format for Verilog $readmemh
-
-"""
-
 import sys
 
 def main():
@@ -26,12 +21,9 @@ def main():
     
     data = data + b'\x00' * (size - len(data))
     
-    # Output as hex (32-bit words)
-    for i in range(0, len(data), 4):
-        word = data[i:i+4]
-        # Little-endian 32-bit word
-        val = word[0] | (word[1] << 8) | (word[2] << 16) | (word[3] << 24)
-        print(f"{val:08x}")
+    # Output as hex (one byte per line)
+    for byte in data:
+        print(f"{byte:02x}")
 
 if __name__ == '__main__':
     main()

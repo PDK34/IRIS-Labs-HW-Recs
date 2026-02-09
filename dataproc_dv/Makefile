@@ -98,17 +98,16 @@ $(VIVADO_SCRIPT): $(RTL_SRCS) $(TESTBENCH)
 	done
 	@echo "add_files -fileset sim_1 $(TESTBENCH)" >> $@
 	@echo "set_property top dataproc_tb [get_filesets sim_1]" >> $@
-	@echo "# Copy hex files to simulation directory" >> $@
-	@echo "set proj_dir [get_property DIRECTORY [current_project]]" >> $@
-	@echo "file copy -force [file normalize \$$proj_dir/../../firmware.hex] \$$proj_dir/firmware.hex" >> $@
-	@echo "file copy -force [file normalize \$$proj_dir/../../image.hex] \$$proj_dir/image.hex" >> $@
+	@echo "# Add hex files using absolute path from script location" >> $@
+	@echo "set script_dir [file dirname [file normalize [info script]]]" >> $@
+	@echo "add_files -fileset sim_1 -norecurse \$$script_dir/firmware.hex" >> $@
+	@echo "add_files -fileset sim_1 -norecurse \$$script_dir/image.hex" >> $@
 	@echo "launch_simulation" >> $@
 	@echo "run all" >> $@
 	@echo "close_sim" >> $@
 	@echo "close_project" >> $@
 	@echo "exit" >> $@
 	@echo "Created $@"
-
 # Run Vivado simulation
 simulate: setup_sim $(FIRMWARE_HEX) image.hex
 	@echo "Running Vivado simulation..."
