@@ -44,7 +44,7 @@ FIRMWARE_DIS = firmware.dis
 # Vivado project
 VIVADO_PROJECT = rvsoc_sim
 SIM_DIR = sim_output
-WDB_FILE = $(SIM_DIR)/$(VIVADO_PROJECT).wdb
+WDB_FILE = $(SIM_DIR)/$(VIVADO_PROJECT).sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
 
 .PHONY: all firmware simulate clean help setup_sim
 
@@ -105,13 +105,12 @@ $(VIVADO_SCRIPT): $(RTL_SRCS) $(TESTBENCH)
 	@echo "launch_simulation" >> $@
 	@echo "# Add all signals to waveform" >> $@
 	@echo "add_wave {{/*}}" >> $@
-	@echo "# Run simulation" >> $@
-	@echo "run all" >> $@
-	@echo "close_sim" >> $@
+	@echo "# Run simulation for specific time" >> $@
+	@echo "run 1ms" >> $@
+	@echo "close_sim -force" >> $@
 	@echo "close_project" >> $@
 	@echo "exit" >> $@
 	@echo "Created $@"
-
 # Run Vivado simulation
 simulate: setup_sim $(FIRMWARE_HEX) image.hex
 	@echo "Running Vivado simulation..."

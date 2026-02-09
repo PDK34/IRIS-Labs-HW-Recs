@@ -280,7 +280,7 @@ void sensitize(char *dp)
 
 void simulate(char *dp)
 {
-iki_register_root_pointers(2, 33784, -7,0,97064, 5,0) ; 
+iki_register_root_pointers(2, 97064, 5,0,33784, -7,0) ; 
 		iki_schedule_processes_at_time_zero(dp, "xsim.dir/dataproc_tb_behav/xsim.reloc");
 	// Initialize Verilog nets in mixed simulation, for the cases when the value at time 0 should be propagated from the mixed language Vhdl net
 	iki_execute_processes();

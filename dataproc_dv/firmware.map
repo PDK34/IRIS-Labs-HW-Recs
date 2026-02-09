@@ -10,26 +10,26 @@ RAM              0x00000000         0x00020000         xrw
 
 Linker script and memory map
 
-LOAD C:\msys64\tmp\cca4HlhJ.o
-LOAD C:\msys64\tmp\ccG22fy6.o
+LOAD C:\msys64\tmp\ccgGNXaR.o
+LOAD C:\msys64\tmp\ccVwZeOS.o
 
 .text           0x00100000      0x63c
                 0x00100000                        . = ALIGN (0x4)
  *(.text)
- .text          0x00100000       0x48 C:\msys64\tmp\cca4HlhJ.o
+ .text          0x00100000       0x48 C:\msys64\tmp\ccgGNXaR.o
                 0x00100000                _start
- .text          0x00100048      0x170 C:\msys64\tmp\ccG22fy6.o
+ .text          0x00100048      0x170 C:\msys64\tmp\ccVwZeOS.o
                 0x00100048                print_hex
                 0x00100104                print_hex32
                 0x00100148                uart_putc
                 0x00100174                print
  *(.text*)
- .text.startup  0x001001b8      0x344 C:\msys64\tmp\ccG22fy6.o
+ .text.startup  0x001001b8      0x344 C:\msys64\tmp\ccVwZeOS.o
                 0x001001b8                main
  *(.rodata)
  *(.rodata*)
  .rodata.str1.4
-                0x001004fc      0x13d C:\msys64\tmp\ccG22fy6.o
+                0x001004fc      0x13d C:\msys64\tmp\ccVwZeOS.o
  *(.srodata)
  *(.srodata*)
                 0x0010063c                        . = ALIGN (0x4)
@@ -38,7 +38,7 @@ LOAD C:\msys64\tmp\ccG22fy6.o
                 0x0010063c                        _sidata = _etext
 
 .rela.dyn       0x0010063c        0x0
- .rela.text     0x0010063c        0x0 C:\msys64\tmp\cca4HlhJ.o
+ .rela.text     0x0010063c        0x0 C:\msys64\tmp\ccgGNXaR.o
 
 .data           0x00000000        0x0 load address 0x0010063c
                 0x00000000                        . = ALIGN (0x4)
@@ -46,8 +46,8 @@ LOAD C:\msys64\tmp\ccG22fy6.o
                 0x00000000                        _ram_start = .
                 0x00000000                        . = ALIGN (0x4)
  *(.data)
- .data          0x00000000        0x0 C:\msys64\tmp\cca4HlhJ.o
- .data          0x00000000        0x0 C:\msys64\tmp\ccG22fy6.o
+ .data          0x00000000        0x0 C:\msys64\tmp\ccgGNXaR.o
+ .data          0x00000000        0x0 C:\msys64\tmp\ccVwZeOS.o
  *(.data*)
  *(.sdata)
  *(.sdata*)
@@ -58,8 +58,8 @@ LOAD C:\msys64\tmp\ccG22fy6.o
                 0x00000000                        . = ALIGN (0x4)
                 0x00000000                        _sbss = .
  *(.bss)
- .bss           0x00000000        0x0 C:\msys64\tmp\cca4HlhJ.o
- .bss           0x00000000        0x0 C:\msys64\tmp\ccG22fy6.o
+ .bss           0x00000000        0x0 C:\msys64\tmp\ccgGNXaR.o
+ .bss           0x00000000        0x0 C:\msys64\tmp\ccVwZeOS.o
  *(.bss*)
  *(.sbss)
  *(.sbss*)
@@ -75,15 +75,15 @@ OUTPUT(firmware.elf elf32-littleriscv)
 .riscv.attributes
                 0x00000000       0x1c
  .riscv.attributes
-                0x00000000       0x1a C:\msys64\tmp\cca4HlhJ.o
+                0x00000000       0x1a C:\msys64\tmp\ccgGNXaR.o
  .riscv.attributes
-                0x0000001a       0x1c C:\msys64\tmp\ccG22fy6.o
+                0x0000001a       0x1c C:\msys64\tmp\ccVwZeOS.o
 
 .comment        0x00000000       0x12
- .comment       0x00000000       0x12 C:\msys64\tmp\ccG22fy6.o
+ .comment       0x00000000       0x12 C:\msys64\tmp\ccVwZeOS.o
                                  0x13 (size before relaxing)
 
 .note.GNU-stack
                 0x00000000        0x0
  .note.GNU-stack
-                0x00000000        0x0 C:\msys64\tmp\ccG22fy6.o
+                0x00000000        0x0 C:\msys64\tmp\ccVwZeOS.o

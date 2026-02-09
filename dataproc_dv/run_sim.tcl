@@ -17,7 +17,10 @@ set script_dir [file dirname [file normalize [info script]]]
 add_files -fileset sim_1 -norecurse $script_dir/firmware.hex
 add_files -fileset sim_1 -norecurse $script_dir/image.hex
 launch_simulation
-run all
-close_sim
+# Add all signals to waveform
+add_wave {{/*}}
+# Run simulation for specific time
+run 1ms
+close_sim -force
 close_project
 exit
