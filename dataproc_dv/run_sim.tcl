@@ -20,7 +20,4 @@ launch_simulation
 # Add all signals to waveform
 add_wave {{/*}}
 # Run simulation for specific time
-run 1ms
-close_sim -force
-close_project
-exit
+run 5ms

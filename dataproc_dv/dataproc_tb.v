@@ -1,9 +1,9 @@
 `timescale 1 ns / 1 ps
 
 module dataproc_tb;
-	reg clk;
-	initial clk = 1'b0;  
-	always #5 clk = (clk === 1'b0);  //100MHz
+	reg clk = 0;
+always #5 clk = ~clk;
+
 
 	reg [5:0] reset_cnt = 0;
 	wire resetn = &reset_cnt;

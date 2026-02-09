@@ -3,8 +3,8 @@
 # SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
 # IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
 # SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
-# Start of session at: Mon Feb  9 21:56:22 2026
-# Process ID         : 11860
+# Start of session at: Mon Feb  9 23:02:20 2026
+# Process ID         : 20904
 # Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
 # Command line       : vivado.exe sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
 # Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
@@ -17,9 +17,9 @@
 # CPU Physical cores : 6
 # CPU Logical cores  : 12
 # Host memory        : 7883 MB
-# Swap memory        : 14582 MB
-# Total Virtual      : 22466 MB
-# Available Virtual  : 5088 MB
+# Swap memory        : 15102 MB
+# Total Virtual      : 22986 MB
+# Available Virtual  : 4645 MB
 #-----------------------------------------------------------
 start_gui
 open_wave_database sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
@@ -112,5 +112,32 @@ WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 avail
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/2025.1.1/Vivado/data/ip'.
-current_fileset: Time (s): cpu = 00:00:34 ; elapsed = 00:00:16 . Memory (MB): peak = 1604.230 ; gain = 185.297
-open_wave_database: Time (s): cpu = 00:00:36 ; elapsed = 00:00:17 . Memory (MB): peak = 1604.230 ; gain = 185.297
+current_fileset: Time (s): cpu = 00:00:29 ; elapsed = 00:00:14 . Memory (MB): peak = 1588.320 ; gain = 165.957
+open_wave_database: Time (s): cpu = 00:00:31 ; elapsed = 00:00:15 . Memory (MB): peak = 1588.320 ; gain = 165.957
+add_wave {{/dataproc_tb}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc/cpu/reg_pc}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc/data_processor}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc/memory}} 
+WARNING: [Wavedata 42-489] Can't add object "/dataproc_tb/uut/soc/memory/mem" to the wave window because it has 1048576 bits, which exceeds the display limit of 65536 bits.  To change the display limit, use the command "set_property display_limit <new limit> [current_wave_config]".
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc/spimemio}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/spiflash}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc/cpu}} 
+current_wave_config {Untitled 1}
+Untitled 1
+add_wave {{/dataproc_tb/uut/soc}} 
+close_sim
+INFO: [Simtcl 6-16] Simulation closed
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 23:05:31 2026...

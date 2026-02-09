@@ -106,10 +106,10 @@ $(VIVADO_SCRIPT): $(RTL_SRCS) $(TESTBENCH)
 	@echo "# Add all signals to waveform" >> $@
 	@echo "add_wave {{/*}}" >> $@
 	@echo "# Run simulation for specific time" >> $@
-	@echo "run 1ms" >> $@
-	@echo "close_sim -force" >> $@
-	@echo "close_project" >> $@
-	@echo "exit" >> $@
+	@echo "run 5ms" >> $@
+#	@echo "close_sim -force" >> $@
+#	@echo "close_project" >> $@
+#	@echo "exit" >> $@ #
 	@echo "Created $@"
 # Run Vivado simulation
 simulate: setup_sim $(FIRMWARE_HEX) image.hex
