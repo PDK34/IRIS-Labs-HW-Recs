@@ -187,7 +187,7 @@ module rvsoc (
 	);
 
 	// Instantiate your data-processing-producing combined module here
-	dataproc_producer_wrapper #(
+	data_proc_wrapper #(
     .IMAGE_SIZE(1024)
 	) data_processor (
 		.clk(clk),                
