@@ -41,7 +41,7 @@ end
 
 
 	rvsoc_wrapper #(
-		.MEM_WORDS(256)
+		.MEM_WORDS(32768)
 	) uut (
 		.clk      (clk),
 		.resetn   (resetn),
