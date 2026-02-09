@@ -3,10 +3,10 @@
 # SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
 # IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
 # SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
-# Start of session at: Mon Feb  9 21:05:08 2026
-# Process ID         : 6956
+# Start of session at: Mon Feb  9 21:55:19 2026
+# Process ID         : 17564
 # Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
-# Command line       : vivado.exe -mode batch -source run_sim.tcl
+# Command line       : vivado.exe sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
 # Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
 # Journal file       : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv\vivado.jou
 # Running On         : rathSha
@@ -19,7 +19,7 @@
 # Host memory        : 7883 MB
 # Swap memory        : 14582 MB
 # Total Virtual      : 22466 MB
-# Available Virtual  : 6487 MB
+# Available Virtual  : 5011 MB
 #-----------------------------------------------------------
-source run_sim.tcl
-source dataproc_tb.tcl
+start_gui
+open_wave_database sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb

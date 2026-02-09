@@ -1,0 +1,32 @@
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_proc
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_proc_wrapper
+WARNING: [VRFC 10-3380] identifier 'proc_ready_in' is used before its declaration [C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_proc_wrapper.v:75]
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/data_prod.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module data_prod
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/picorv32.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module picorv32
+INFO: [VRFC 10-311] analyzing module picorv32_regs
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_fast_mul
+INFO: [VRFC 10-311] analyzing module picorv32_pcpi_div
+INFO: [VRFC 10-311] analyzing module picorv32_axi
+INFO: [VRFC 10-311] analyzing module picorv32_axi_adapter
+INFO: [VRFC 10-311] analyzing module picorv32_wb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/rvsoc.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rvsoc
+INFO: [VRFC 10-311] analyzing module soc_mem
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/rvsoc_wrapper.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module rvsoc_wrapper
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/simpleuart.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module simpleuart
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/spiflash.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spiflash
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/spimemio.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module spimemio
+INFO: [VRFC 10-311] analyzing module spimemio_xfer
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/dataproc_tb.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module dataproc_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

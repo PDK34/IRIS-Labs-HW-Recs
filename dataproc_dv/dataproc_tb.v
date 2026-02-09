@@ -2,6 +2,7 @@
 
 module dataproc_tb;
 	reg clk;
+	initial clk = 1'b0;  
 	always #5 clk = (clk === 1'b0);  //100MHz
 
 	reg [5:0] reset_cnt = 0;

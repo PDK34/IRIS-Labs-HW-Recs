@@ -3,8 +3,8 @@
 # SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
 # IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
 # SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
-# Start of session at: Mon Feb  9 21:05:08 2026
-# Process ID         : 6956
+# Start of session at: Mon Feb  9 21:52:21 2026
+# Process ID         : 23848
 # Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
 # Command line       : vivado.exe -mode batch -source run_sim.tcl
 # Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
@@ -19,11 +19,11 @@
 # Host memory        : 7883 MB
 # Swap memory        : 14582 MB
 # Total Virtual      : 22466 MB
-# Available Virtual  : 6487 MB
+# Available Virtual  : 5092 MB
 #-----------------------------------------------------------
 source run_sim.tcl
 # create_project rvsoc_sim sim_output -part xc7a35tcpg236-1 -force
-create_project: Time (s): cpu = 00:00:09 ; elapsed = 00:00:06 . Memory (MB): peak = 493.836 ; gain = 212.777
+create_project: Time (s): cpu = 00:00:22 ; elapsed = 00:00:15 . Memory (MB): peak = 493.062 ; gain = 212.629
 # set_property simulator_language Verilog [current_project]
 # add_files ../rvsoc.v
 # add_files ../rvsoc_wrapper.v
@@ -85,7 +85,7 @@ INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/
 INFO: [VRFC 10-311] analyzing module dataproc_tb
 INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
 INFO: [VRFC 10-311] analyzing module glbl
-INFO: [USF-XSim-69] 'compile' step finished in '1' seconds
+INFO: [USF-XSim-69] 'compile' step finished in '2' seconds
 INFO: [USF-XSim-3] XSim::Elaborate design
 INFO: [USF-XSim-61] Executing 'ELABORATE' step in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
 "xelab --incr --debug typical --relax --mt 2 -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip --snapshot dataproc_tb_behav xil_defaultlib.dataproc_tb xil_defaultlib.glbl -log elaborate.log"
@@ -108,14 +108,15 @@ Compiling module xil_defaultlib.simpleuart
 Compiling module xil_defaultlib.data_prod
 Compiling module xil_defaultlib.data_proc
 Compiling module xil_defaultlib.data_proc_wrapper
-Compiling module xil_defaultlib.soc_mem
+Compiling module xil_defaultlib.soc_mem(WORDS=32768)
 Compiling module xil_defaultlib.rvsoc(BARREL_SHIFTER=1'b0,ENABLE...
-Compiling module xil_defaultlib.rvsoc_wrapper(MEM_WORDS=256)
+Compiling module xil_defaultlib.rvsoc_wrapper
 Compiling module xil_defaultlib.spiflash
 Compiling module xil_defaultlib.dataproc_tb
 Compiling module xil_defaultlib.glbl
 Built simulation snapshot dataproc_tb_behav
-INFO: [USF-XSim-69] 'elaborate' step finished in '4' seconds
+run_program: Time (s): cpu = 00:00:00 ; elapsed = 00:00:10 . Memory (MB): peak = 498.281 ; gain = 0.000
+INFO: [USF-XSim-69] 'elaborate' step finished in '10' seconds
 INFO: [USF-XSim-4] XSim::Simulate design
 INFO: [USF-XSim-61] Executing 'SIMULATE' step in 'C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/sim_output/rvsoc_sim.sim/sim_1/behav/xsim'
 INFO: [USF-XSim-98] *** Running xsim
@@ -135,11 +136,11 @@ source dataproc_tb.tcl
 ## run 1000ns
 INFO: [USF-XSim-96] XSim completed. Design snapshot 'dataproc_tb_behav' loaded.
 INFO: [USF-XSim-97] XSim simulation ran for 1000ns
-launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:11 . Memory (MB): peak = 500.000 ; gain = 6.164
+launch_simulation: Time (s): cpu = 00:00:00 ; elapsed = 00:00:21 . Memory (MB): peak = 498.281 ; gain = 5.219
 # add_wave {{/*}}
 # run 1ms
 # close_sim -force
 INFO: [Simtcl 6-16] Simulation closed
 # close_project
 # exit
-INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 21:05:28 2026...
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 21:53:10 2026...

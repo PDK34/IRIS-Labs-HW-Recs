@@ -1,0 +1,18 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  --include "../../../../../../../../../../../Xilinx/2025.1.1/Vivado/data/rsb/busdef" \
+"../../../../../data_proc.v" \
+"../../../../../data_proc_wrapper.v" \
+"../../../../../data_prod.v" \
+"../../../../../../picorv32.v" \
+"../../../../../../rvsoc.v" \
+"../../../../../../rvsoc_wrapper.v" \
+"../../../../../../simpleuart.v" \
+"../../../../../../spiflash.v" \
+"../../../../../../spimemio.v" \
+"../../../../../dataproc_tb.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

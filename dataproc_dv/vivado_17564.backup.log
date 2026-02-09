@@ -3,8 +3,8 @@
 # SW Build 6233196 on Thu Sep 11 21:27:30 MDT 2025
 # IP Build 6232796 on Fri Sep 12 01:46:16 MDT 2025
 # SharedData Build 6233195 on Thu Sep 11 17:56:43 MDT 2025
-# Start of session at: Mon Feb  9 21:56:22 2026
-# Process ID         : 11860
+# Start of session at: Mon Feb  9 21:55:19 2026
+# Process ID         : 17564
 # Current directory  : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv
 # Command line       : vivado.exe sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
 # Log file           : C:/Users/srsha/Desktop/gh_Projects/IRIS-Labs-HW-Recs/dataproc_dv/vivado.log
@@ -19,7 +19,7 @@
 # Host memory        : 7883 MB
 # Swap memory        : 14582 MB
 # Total Virtual      : 22466 MB
-# Available Virtual  : 5088 MB
+# Available Virtual  : 5011 MB
 #-----------------------------------------------------------
 start_gui
 open_wave_database sim_output/rvsoc_sim.sim/sim_1/behav/xsim/dataproc_tb_behav.wdb
@@ -112,5 +112,14 @@ WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 avail
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/2025.1.1/Vivado/data/ip'.
-current_fileset: Time (s): cpu = 00:00:34 ; elapsed = 00:00:16 . Memory (MB): peak = 1604.230 ; gain = 185.297
-open_wave_database: Time (s): cpu = 00:00:36 ; elapsed = 00:00:17 . Memory (MB): peak = 1604.230 ; gain = 185.297
+INFO: [Common 17-41] Interrupt caught. Command should exit soon.
+INFO: [Common 17-344] 'source' was cancelled
+error reading package index file C:/Xilinx/2025.1.1/Vivado/tps/tcl/tcllib2.0/pkgIndex.tcl: 
+INFO: [Common 17-344] 'tclapp::load_apps' was cancelled
+1
+INFO: [Common 17-344] 'current_fileset' was cancelled
+INFO: [Common 17-344] 'open_wave_database' was cancelled
+1
+INFO: [Common 17-344] 'rdi::open_ppr_or_dcp' was cancelled
+exit
+INFO: [Common 17-206] Exiting Vivado at Mon Feb  9 21:56:18 2026...
