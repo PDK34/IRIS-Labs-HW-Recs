@@ -6,11 +6,11 @@
 #define REG_UART_CLKDIV (*(volatile uint32_t*)0x02000004)
 #define REG_UART_DATA   (*(volatile uint32_t*)0x02000008)
 
-//Processor mapped custom Registers
-#define DP_CONTROL      (*(volatile uint32_t*)0x02001000)
-#define DP_STATUS       (*(volatile uint32_t*)0x02001004)
-#define DP_OUTPUT       (*(volatile uint32_t*)0x0200100C)
-#define DP_INPUT        (*(volatile uint32_t*)0x02001010) 
+//Processor mapped Registers to communicate with our processing block
+#define PROC_CONTROL      (*(volatile uint32_t*)0x02001000)
+#define PROC_STATUS       (*(volatile uint32_t*)0x02001004)
+#define PROC_OUTPUT       (*(volatile uint32_t*)0x0200100C)
+#define PROC_INPUT        (*(volatile uint32_t*)0x02001010) 
 
 
 //Dummy array to simulate Flash Data
@@ -42,7 +42,7 @@ void main() {
     print("Reading Image from SPI Flash\n");
 
     //Invert Mode
-    DP_CONTROL = 0x03; 
+    PROC_CONTROL = 0x03; 
 
     volatile uint8_t *flash_image = (uint8_t *)FLASH_IMAGE_ADDR;
 
@@ -53,16 +53,16 @@ void main() {
         
         uint8_t pixel = flash_image[i]; 
         
-        DP_INPUT = pixel;
+        PROC_INPUT = pixel;
         
-        while((DP_STATUS & 0x02) == 0);
+        while((PROC_STATUS & 0x02) == 0);
         
-        print_hex(DP_OUTPUT & 0xFF);
+        print_hex(PROC_OUTPUT & 0xFF);
         print(" ");
     }
     
     print("\nDone.\n");
     
-    DP_CONTROL = 0x00;
+    PROC_CONTROL = 0x00;
     while(1);
 }
