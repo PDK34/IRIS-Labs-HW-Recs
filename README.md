@@ -154,4 +154,26 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 </table>
 
 - ### Design :
-  1. Bus interface : data_proc_wrapper.v implements a minimal handshaking protocol linking the cpu core with the processing block. The CPU core only writes and read to and from the 32 bit registers defined above, similar to how it will do any other memory mapped peripheral.Hence,this wrapper logic is necessary to decode these address values of registers in a way that the hardware block can understand and act on it.
+  - Bus interface : data_proc_wrapper.v implements a minimal handshaking protocol linking the cpu core with the processing block. The CPU core only writes and read to and from the 32 bit registers defined above, similar to how it will do any other memory mapped peripheral.Hence,this wrapper logic is necessary to decode these address values of registers in a way that the hardware block can understand and act on it.
+
+  - Firmware.c : Consists of a small test program which writes 0x03 to DP_CONTROL to trigger Invert Mode (Mode 01) and set the Start bit. 
+  This is used to verify the proper working of this design .The program also makes use of the given UART module to print the processed pixels .
+  
+  Initially, the program directly used RAM without flash .The image.hex was directly compiled into firmware.hex which was loaded directly into RAM at boot and cpu would directly fetch it from there. This was done to help debug the program and the results are verified as given below :
+
+  <img src="./PartC_Simulation.png" alt="part_C_sim_RAM" width="80%" />
+
+  Now ,the image.hex makes use of spiflash and is loaded there initially .The risc-v core makes use of the spimemio controller to access this data and process the pixels. The program is verified as follows :
+
+  Input sequence(at start of image.hex) :  <img src="./PartC_input_16_bytes.png" alt="part_C_sim_imput" width="40%" />
+  <img src="./PartC_Simulation_with_spi.png" alt="part_C_sim_flash" width="80%" />
+
+  As can be seen , the correct inverted sequence of first 16 input bytes is given as output .
+
+  - Makefile : A minimal build system with the following commands is implemented :
+    
+    - make all : Executes the entire necessary pipeline, all the way from Compiling the C firmware and Verilog processing logic, and running the simulation.
+
+    - make firmware : Uses the riscv64-unknown-elf-gcc toolchain to compile start.s and firmware.c into an .elf file. It then extracts the raw binary and uses makehex.py to format it into a firmware.hex file that the Verilog $readmemh system task can load into simulated RAM.
+
+    -

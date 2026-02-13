@@ -26,17 +26,6 @@ firmware.bin: firmware.elf
 firmware.hex: firmware.bin
 	python3 makehex.py $< $@
 
-elaborate:
-	$(XVLOG) --sv dataproc_tb.v $(RTL)
-	$(XELAB) -debug typical dataproc_tb -s dataproc_tb_snapshot
-
-simulate: firmware.hex elaborate
-	$(XSIM) dataproc_tb_snapshot -runall
-
-simulate_gui: firmware.hex elaborate
-	$(XSIM) dataproc_tb_snapshot -gui
-
-
 clean:
 	@echo "Cleaning build files..."
 	rm -f firmware.elf firmware.bin firmware.hex
