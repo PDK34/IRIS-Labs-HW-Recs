@@ -110,8 +110,8 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
   <tbody>
     <tr>
       <td><code>0x02001000</code></td>
-      <td><strong>DP_CONTROL</strong></td>
-      <td style="text-align:center">R/W</td>
+      <td><strong>PROC_CONTROL</strong></td>
+      <td style="text-align:center">Read/Write</td>
       <td>Control register to configure mode and start execution</td>
       <td>
         <strong>[2:1]</strong> Mode Select:<br>
@@ -123,8 +123,8 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
     </tr>
     <tr>
       <td><code>0x02001004</code></td>
-      <td><strong>DP_STATUS</strong></td>
-      <td style="text-align:center">R/O</td>
+      <td><strong>PROC_STATUS</strong></td>
+      <td style="text-align:center">Read-only</td>
       <td>Status flags to check hardware state</td>
       <td>
         <strong>[1]</strong> Output Valid (1 = Ready to read)<br>
@@ -133,8 +133,8 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
     </tr>
     <tr>
       <td><code>0x02001008</code></td>
-      <td><strong>DP_PIXCOUNT</strong></td>
-      <td style="text-align:center">R/O</td>
+      <td><strong>PROC_PIXCOUNT</strong></td>
+      <td style="text-align:center">Read-only</td>
       <td>Track processed pixels</td>
       <td>
         <strong>[31:0]</strong> Total Pixel Count
@@ -142,8 +142,8 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
     </tr>
     <tr>
       <td><code>0x0200100C</code></td>
-      <td><strong>DP_DATA</strong></td>
-      <td style="text-align:center">R/W</td>
+      <td><strong>PROC_DATA</strong></td>
+      <td style="text-align:center">Read/Write</td>
       <td>Data port for streaming pixels out</td>
       <td>
         <strong>[8]</strong> Read Valid Flag (Read-only)<br>
