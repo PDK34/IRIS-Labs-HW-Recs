@@ -176,4 +176,4 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
     - make firmware : Uses the riscv64-unknown-elf-gcc toolchain to compile start.s and firmware.c into an .elf file. It then extracts the raw binary and uses makehex.py to format it into a firmware.hex file that the Verilog $readmemh system task can load into simulated RAM.
 
-    -
+    - make clean : Deletes all automatically generated object files, binaries, hex files, and Xilinx simulation directories and files created by vivado during the compilation and simulation of the program, leaving only the source and testbench files that were present before.
