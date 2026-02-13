@@ -1,29 +1,33 @@
 #!/usr/bin/env python3
+"""
+makehex.py - Convert binary to 32-bit hex words for RAM boot
+"""
 import sys
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: makehex.py <input.bin> <size_in_bytes>", file=sys.stderr)
+        print("Usage: makehex.py <input.bin> <output.hex>", file=sys.stderr)
         sys.exit(1)
     
     binfile = sys.argv[1]
-    size = int(sys.argv[2])
+    hexfile = sys.argv[2]
     
-    # Read binary file
+    #Read binary
     with open(binfile, 'rb') as f:
         data = f.read()
     
-    # Pad to size
-    if len(data) > size:
-        print(f"Error: Binary file ({len(data)} bytes) larger than size ({size} bytes)", 
-              file=sys.stderr)
-        sys.exit(1)
+    #Pad to 4-byte boundary
+    while len(data) % 4 != 0:
+        data += b'\x00'
     
-    data = data + b'\x00' * (size - len(data))
+    #Write as 32-bit little-endian words
+    with open(hexfile, 'w') as f:
+        for i in range(0, len(data), 4):
+            # Little-endian: LSB first
+            word = (data[i+0]) | (data[i+1] << 8) | (data[i+2] << 16) | (data[i+3] << 24)
+            f.write(f"{word:08x}\n")
     
-    # Output as hex (one byte per line)
-    for byte in data:
-        print(f"{byte:02x}")
+    print(f"Generated {len(data)//4} words in {hexfile}")
 
 if __name__ == '__main__':
     main()

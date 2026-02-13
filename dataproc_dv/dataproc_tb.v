@@ -1,21 +1,18 @@
-`timescale 1 ns / 1 ps
+`timescale 1ns/1ps
 
 module dataproc_tb;
 	reg clk = 0;
-always #5 clk = ~clk;
-
+	always #5 clk = ~clk;
 
 	reg [5:0] reset_cnt = 0;
 	wire resetn = &reset_cnt;
 
 	always @(posedge clk) begin
-		reset_cnt <= reset_cnt + !resetn;
+		if (reset_cnt < 63)
+			reset_cnt <= reset_cnt + 1;
 	end
 
-	localparam ser_half_period = 53;
-	event ser_sample;
-
-	wire ser_rx;
+	wire ser_rx = 1'b1;
 	wire ser_tx;
 
 	wire flash_csb;
@@ -25,21 +22,33 @@ always #5 clk = ~clk;
 	wire flash_io2;
 	wire flash_io3;
 
-	/* Write your tb logic for your dataprocessing module here */
+	initial begin
+		$dumpfile("dataproc_tb.vcd");
+		$dumpvars(0, dataproc_tb);
+		
+		$display("\nSimulation Started");
+		
+		$readmemh("firmware.hex", uut.soc.memory.mem);
 
-always @(posedge clk) begin
-    if (uut.soc.mem_valid && uut.soc.mem_addr == 32'h02001000) begin
-        $display("HW DEBUG: CPU wrote to DATAPROC_CONTROL with value %h", uut.soc.mem_wdata);
-    end
-end
-
-
-
-
-
-
-	/*----------------------------------------------------------*/
-
+		$readmemh("image.hex", spiflash.memory, 32'h100000);
+		
+		@(posedge resetn);
+		$display("[%0t]Reset released\n", $time);
+		
+		#50000000;
+		$display("\n\n--Simulation Complete--");
+		$finish;
+	end
+	
+	//UART Monitor
+	always @(posedge clk) begin
+		if (uut.soc.simpleuart.reg_dat_we) begin
+			$write("%c", uut.soc.simpleuart.reg_dat_di[7:0]);
+			$fflush();
+			//Wait for the write signal to drop before looking for the next one
+			wait(!uut.soc.simpleuart.reg_dat_we); 
+		end
+	end
 
 	rvsoc_wrapper #(
 		.MEM_WORDS(32768)
@@ -64,29 +73,4 @@ end
 		.io2(flash_io2),
 		.io3(flash_io3)
 	);
-
-	reg [7:0] buffer;
-
-	always begin
-		@(negedge ser_tx);
-
-		repeat (ser_half_period) @(posedge clk);
-		-> ser_sample;
-
-		repeat (8) begin
-			repeat (ser_half_period) @(posedge clk);
-			repeat (ser_half_period) @(posedge clk);
-			buffer = {ser_tx, buffer[7:1]};
-			-> ser_sample;
-		end
-
-		repeat (ser_half_period) @(posedge clk);
-		repeat (ser_half_period) @(posedge clk);
-		-> ser_sample;
-
-		if (buffer < 32 || buffer >= 127)
-			$display("Serial data: %d", buffer);
-		else
-			$display("Serial data: '%c'", buffer);
-	end
 endmodule

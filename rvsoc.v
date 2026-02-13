@@ -42,7 +42,7 @@ module rvsoc (
 	parameter [0:0] ENABLE_COUNTERS = 1;
 	parameter [0:0] ENABLE_IRQ_QREGS = 0;
 
-	parameter integer MEM_WORDS = 256;
+	parameter integer MEM_WORDS = 32768;
 	parameter [31:0] STACKADDR = (4*MEM_WORDS);
 	parameter [31:0] PROGADDR_RESET = 32'h 0010_0000;
 	parameter [31:0] PROGADDR_IRQ = 32'h 0000_0000;
@@ -89,9 +89,9 @@ module rvsoc (
 	wire [31:0] simpleuart_reg_dat_do;
 	wire        simpleuart_reg_dat_wait;
 
-	wire dataproc_ready; //New signals for processor 
+	// Data Processor signals
+	wire        dataproc_ready;
 	wire [31:0] dataproc_rdata;
-
 
 	assign mem_ready =
     (iomem_valid && iomem_ready) ||
@@ -99,8 +99,8 @@ module rvsoc (
     ram_ready ||
     spimemio_cfgreg_sel ||
     simpleuart_reg_div_sel ||
-    (simpleuart_reg_dat_sel && !simpleuart_reg_dat_wait)||
-	dataproc_ready;
+    (simpleuart_reg_dat_sel && !simpleuart_reg_dat_wait) ||
+    dataproc_ready;
 
 	assign mem_rdata =
     (iomem_valid && iomem_ready) ? iomem_rdata :
@@ -109,7 +109,7 @@ module rvsoc (
     spimemio_cfgreg_sel         ? spimemio_cfgreg_do :
     simpleuart_reg_div_sel      ? simpleuart_reg_div_do :
     simpleuart_reg_dat_sel      ? simpleuart_reg_dat_do :
-	dataproc_ready              ? dataproc_rdata :  
+    dataproc_ready              ? dataproc_rdata :
     32'h0;
 
 	picorv32 #(
@@ -186,20 +186,17 @@ module rvsoc (
 		.reg_dat_wait(simpleuart_reg_dat_wait)
 	);
 
-	// Instantiate your data-processing-producing combined module here
-	data_proc_wrapper #(
-    .IMAGE_SIZE(1024)
-	) data_processor (
-		.clk(clk),                
-		.resetn(resetn),
-		.mem_valid(mem_valid),
-		.mem_ready(dataproc_ready),
-		.mem_wstrb(mem_wstrb),
-		.mem_addr(mem_addr),
-		.mem_wdata(mem_wdata),
-		.mem_rdata(dataproc_rdata)
-	);
-
+	// Instantiate data processor wrapper
+	data_proc_wrapper data_processor (
+        .clk(clk),
+        .resetn(resetn),
+        .mem_valid(mem_valid),
+        .mem_ready(dataproc_ready),
+        .mem_wstrb(mem_wstrb),
+        .mem_addr(mem_addr),
+        .mem_wdata(mem_wdata),
+        .mem_rdata(dataproc_rdata)
+    );
 
 	//----------------------------------------------------------------
 
@@ -236,4 +233,3 @@ module soc_mem #(
 		if (wen[3]) mem[addr][31:24] <= wdata[31:24];
 	end
 endmodule
-

@@ -1,0 +1,251 @@
+[33mcommit 5b184984cae0d2f8d9a1fc916cc6a0ad7a080f91[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Thu Feb 12 00:30:52 2026 +0530
+
+    Fix pixel shift due to handshaking
+
+[33mcommit 8ecb54f1cb6239740c567527e60f29b3e5f5b0ec[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Thu Feb 12 00:08:56 2026 +0530
+
+    Fix design Part C
+
+[33mcommit aa8560ea09b9d3c16c58c161a3c042e2b1aed94b[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Tue Feb 10 18:18:29 2026 +0530
+
+    Update run time of sim
+
+[33mcommit 2c83454428ecf4b6f62fe65817cbfe7bff42c97b[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 23:59:33 2026 +0530
+
+    Fix dara_proc_wrapper and add stack initialization to start.s
+
+[33mcommit 25e56b75f8c0fd0ebf00a1d99688064333bf5011[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 23:07:24 2026 +0530
+
+    Update Makefile
+
+[33mcommit 9c07c36f8fabbcc00840f187babd35f2637b21d6[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 21:59:53 2026 +0530
+
+    Fix dataproc_tb
+
+[33mcommit 15f7408fe6333353f20328ea671b20d9da6f7606[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 21:22:02 2026 +0530
+
+    Fix memory size mismatch in tb and sections.ls
+
+[33mcommit f7301fc45b4bae3b7703ed1ca7b318fe0af80c53[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 21:16:36 2026 +0530
+
+    Update dataprc_tb with debug signals
+
+[33mcommit 8f9ac769cb2dfafdaca540c2f66b6140e363ef39[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 21:15:41 2026 +0530
+
+    Update picorv32 with correct reset address
+
+[33mcommit 96e4ff914e25ad16ee8c8e3f6061c74df5d3add7[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 20:16:22 2026 +0530
+
+    Update makefile
+
+[33mcommit fb1887625f654e2cd8c5c7f96172e409cb66977b[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 20:15:30 2026 +0530
+
+    Update makehex.py
+
+[33mcommit 94f3ff1e55aa793a09f104d739eb3ca6fffda9a0[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 19:44:48 2026 +0530
+
+    remove auto-generated files
+
+[33mcommit a24a5baa61f445fe63531028e060e1f475d6acd4[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 19:44:16 2026 +0530
+
+    Update Makefile
+
+[33mcommit 0a55acd1473b80703be1e5ef14f76d6adf36eaa7[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 19:40:32 2026 +0530
+
+    Add makefile
+
+[33mcommit e58fcb97fec878c16b590a266603e83f32d8c891[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 19:01:53 2026 +0530
+
+    Add makehex.py
+
+[33mcommit 7c5ead25623b68bbf697d3f32e734a6fedc6151c[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 17:58:16 2026 +0530
+
+    Add start.s
+
+[33mcommit a64f0205a0539d4f084150638d7445662a955907[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Mon Feb 9 17:53:08 2026 +0530
+
+    Integrate wrapper with soc
+
+[33mcommit c20d054d6f001e695d43da06bc57bd0b9bde5a5b[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 22:16:50 2026 +0530
+
+    Update firmware.c
+
+[33mcommit 2e57f515452512fc9aae445d49eae8f453a31db1[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 22:00:58 2026 +0530
+
+    Update data_proc_wrapper
+
+[33mcommit 1e2086df3adbfe1e0223fc008a1197a0f5dc7c7f[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 15:12:46 2026 +0530
+
+    Add data_proc_wrapper.v
+
+[33mcommit 985c0d7db359d3e48ceea690902c937fec46b37b[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 14:49:09 2026 +0530
+
+    Update README.md formatting
+
+[33mcommit 8530f349bced5d5bec2e38f421d1a89a5e534d8a[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 14:45:45 2026 +0530
+
+    Update README.md formatting
+
+[33mcommit 63005036b05db041130288a550548e9b59e1bed5[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 14:29:24 2026 +0530
+
+    Update README.md
+
+[33mcommit 96f80b723571701c36069d05983a8104424da81c[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 14:23:56 2026 +0530
+
+    Update README.md
+
+[33mcommit d36f919ccc86c9e3cc2ae93709cbdf2ccc139562[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 13:21:36 2026 +0530
+
+    Add images to README.md
+
+[33mcommit 7fc111ece4e92c72889bff43cc02e2aec2106f90[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 12:26:32 2026 +0530
+
+    Update README.md
+
+[33mcommit 2882991d04ed6aa2bace8613b7f27b488198ea8b[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 12:23:23 2026 +0530
+
+    Update formatting in README.md
+
+[33mcommit 9128c6f65d1cdd5846041f1ed96ad112bf42ee69[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 12:15:52 2026 +0530
+
+    Update README.md with TASK B details
+
+[33mcommit cac20cfecb1951fefd73bc6668c3f1b0258ebcd1[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 11:50:10 2026 +0530
+
+    Update test image file and python sripts
+
+[33mcommit 7c1bc2189a60cb6c02b5dbaf20340af1ad9675f4[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 11:27:01 2026 +0530
+
+    Update tb to deal with initial pixel loss when other modes after the first one is tested
+
+[33mcommit d69b573fc4810bb5095c380f266bf83b2a36fcb4[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 00:41:31 2026 +0530
+
+    Fix async_fio.v
+
+[33mcommit 0e5a690d6b7f5778169e9cd7ac71e5a37649b876[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 00:24:18 2026 +0530
+
+    Update async_fifo
+
+[33mcommit e74ec53161b768fe895075dfcb3a8cfb3c6fbb0f[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sun Feb 8 00:19:39 2026 +0530
+
+    Update testbench to integrate async_fifo.v
+
+[33mcommit 26a05928dc5e167832746464cac490b1ccd98e79[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 23:24:31 2026 +0530
+
+    Add async_fifo.v
+
+[33mcommit 0cf8a4dc77110f70a326a42c785a7e51cf4cd705[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 13:39:19 2026 +0530
+
+    Update README.md
+
+[33mcommit fec8363ac3ec17f16a3f912aee97a3015bf1793d[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 13:08:42 2026 +0530
+
+    Fix circular dependency in streaming signals
+
+[33mcommit 3802fb144e0295dc8c6532ee5d9e66f787a1a4b7[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 12:40:26 2026 +0530
+
+    Add python script to convert image to hex file
+
+[33mcommit 2cff4b511c5d2532b1cb36efccb658ae2022f4f0[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 12:27:36 2026 +0530
+
+    Update testbench to include logic for mode testing
+
+[33mcommit b1c0ad85cd5d618499ccee1ed395717258406a62[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Sat Feb 7 00:05:01 2026 +0530
+
+    Update data_proc.v with required data processing logic for different modes
+
+[33mcommit cecdb734afd3067a776c9df7ec0eba640f211056[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Thu Feb 5 21:17:58 2026 +0530
+
+    Update formatting in README.md
+
+[33mcommit e5c685586835b7ac23384419e9a00293acdad215[m
+Author: Parthip <projectcs34@gmail.com>
+Date:   Wed Feb 4 23:15:29 2026 +0530
+
+    Update README.md with Task A answers
+
+[33mcommit 508c0cae6abe50e448d3b449c967af7399723a56[m
+Author: Adithya <adithyu123@gmail.com>
+Date:   Mon Feb 2 23:59:10 2026 +0530
+
+    initial commit

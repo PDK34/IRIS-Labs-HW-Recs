@@ -1,11 +1,13 @@
 /*
-This module wraps both data_prod and data_proc, providing a
-memory-mapped interface for the CPU to control them.
+This module interfaces processing block, providing a memory-mapped interface 
+for the CPU to feed it data
+
 Register Map:
-0x02001000 - CONTROL      [2:1]=mode, [0]=start  
+0x02001000 - CONTROL      [2:1]=mode, [0]=start
 0x02001004 - STATUS       [1]=valid_out, [0]=busy
 0x02001008 - PIXEL_COUNT  [31:0]=pixels processed
 0x0200100C - OUTPUT_DATA  [8]=valid, [7:0]=pixel
+0x02001010 - INPUT_DATA   [7:0]=pixel (Write Only) <-- NEW
 */
 `timescale 1ns/1ps
 
@@ -13,7 +15,7 @@ module data_proc_wrapper (
     input clk,
     input resetn,
     
-    // Memory bus interface (from rvsoc)
+    // Memory bus interface
     input         mem_valid,
     output        mem_ready,
     input  [ 3:0] mem_wstrb,
@@ -22,124 +24,84 @@ module data_proc_wrapper (
     output [31:0] mem_rdata
 );
 
-   
-    parameter IMAGE_SIZE = 1024;
-    
+    //Bus Interface Logic
+    wire control_sel = mem_valid && (mem_addr == 32'h02001000);
+    wire status_sel  = mem_valid && (mem_addr == 32'h02001004);
+    wire count_sel   = mem_valid && (mem_addr == 32'h02001008);
+    wire output_sel  = mem_valid && (mem_addr == 32'h0200100C);
+    wire input_sel   = mem_valid && (mem_addr == 32'h02001010); // New Input Address
 
-    wire control_sel    = mem_valid && (mem_addr == 32'h02001000);
-    wire status_sel     = mem_valid && (mem_addr == 32'h02001004);
-    wire pixcount_sel   = mem_valid && (mem_addr == 32'h02001008);
-    wire output_sel     = mem_valid && (mem_addr == 32'h0200100C);
-    
-    wire reg_sel = control_sel || status_sel || pixcount_sel || output_sel;
-    
-    reg mem_ready_reg;
+    assign mem_ready = (control_sel || status_sel || count_sel || output_sel || input_sel);
+
+    //Control Registers
+    reg [2:0] control_reg; 
+    wire start_reg = control_reg[0];
+    wire [1:0] mode_reg = control_reg[2:1];
+    reg [31:0] pixel_count_reg;
+
     always @(posedge clk) begin
-        if (!resetn)
-            mem_ready_reg <= 1'b0;
-        else
-            mem_ready_reg <= reg_sel && !mem_ready_reg;
+        if (!resetn) control_reg <= 0;
+        else if (control_sel && mem_wstrb[0]) control_reg <= mem_wdata[2:0];
     end
-    assign mem_ready = mem_ready_reg;
+
+    //Streaming Interface 
+    reg [7:0] proc_pixel_in_reg;
+    reg       proc_valid_in_reg;
+    wire      proc_ready_out; // From core
     
-    //CONTROL REGISTER(0x02001000) - R/W
-    reg start_reg;
-    reg [1:0] mode_reg;
-    
+    //When CPU writes to 0x02001010 assert VALID to the core
     always @(posedge clk) begin
         if (!resetn) begin
-            start_reg <= 1'b0;
-            mode_reg  <= 2'b00;
-        end else if (control_sel && mem_wstrb[0]) begin
-            start_reg <= mem_wdata[0];
-            mode_reg  <= mem_wdata[2:1];
+            proc_valid_in_reg <= 0;
+            proc_pixel_in_reg <= 0;
+        end else begin
+            //If CPU writes new pixel
+            if (input_sel && mem_wstrb[0]) begin
+                proc_pixel_in_reg <= mem_wdata[7:0];
+                proc_valid_in_reg <= 1'b1;
+            end 
+            else if (proc_ready_out) begin
+                proc_valid_in_reg <= 1'b0;
+            end
         end
     end
+
     
-    wire [31:0] control_rdata = {29'h0, mode_reg, start_reg};
-    
-    //STATUS REGISTER(0x02001004) - Read Only
-    wire busy_flag;
+    wire [7:0] output_pixel;
     wire output_valid_flag;
     
-    wire [31:0] status_rdata = {30'h0, output_valid_flag, busy_flag};
-    
-    //PIXEL COUNT REGISTER(0x02001008) - Read Only
-    reg [31:0] pixel_count_reg;
-    
+    //Acknowledge read when CPU reads the output reg
+    wire cpu_read_ack = output_sel && (mem_wstrb == 4'b0);
+
     always @(posedge clk) begin
-        if (!resetn)
-            pixel_count_reg <= 32'h0;
-        else if (!start_reg)
-            pixel_count_reg <= 32'h0;
-        else if (output_valid_flag && proc_ready_in)
-            pixel_count_reg <= pixel_count_reg + 1;
+        if (!resetn || !start_reg) pixel_count_reg <= 0;
+        else if (output_valid_flag && cpu_read_ack) pixel_count_reg <= pixel_count_reg + 1;
     end
-    
-    wire [31:0] pixcount_rdata = pixel_count_reg;
-    
-    //OUTPUT DATA REGISTER(0x0200100C) - Read Only
-    wire [7:0] output_pixel;
-    
-    wire [31:0] output_rdata = {23'h0, output_valid_flag, output_pixel};
-    
-    //READ DATA MUX
-    assign mem_rdata = 
-        control_sel   ? control_rdata   :
-        status_sel    ? status_rdata    :
-        pixcount_sel  ? pixcount_rdata  :
-        output_sel    ? output_rdata    :
-        32'h00000000;
-    
-    // data producer(runs on system clk in this case)
-    wire [7:0] pixel_from_prod;
-    wire valid_from_prod;
-    wire ready_to_prod;
-    
-    data_prod #(
-        .IMAGE_SIZE(IMAGE_SIZE)
-    ) data_producer (
-        .sensor_clk(clk),  //Uses same clk as system here   
-        .rst_n(resetn),
-        .ready(ready_to_prod && start_reg),
-        .pixel(pixel_from_prod),
-        .valid(valid_from_prod)
-    );
-    
-    //Data processor
-    wire proc_ready_out;
-    wire proc_ready_in = 1'b1; //set always ready to accept output
-    
-    assign ready_to_prod = proc_ready_out;
-    
-    // Busy flag
-    reg [1:0] proc_state;
-    localparam IDLE = 2'b00, PROCESS = 2'b01;
-    
-    always @(posedge clk) begin
-        if (!resetn)
-            proc_state <= IDLE;
-        else if (start_reg)
-            proc_state <= PROCESS;
-        else
-            proc_state <= IDLE;
-    end
-    
-    assign busy_flag = (proc_state == PROCESS);
-    
-    data_proc data_processor (
-        .clk(clk), //Same clk as system here
+
+    data_proc #(.IMG_WIDTH(32)) data_processor (
+        .clk(clk),
         .rstn(resetn),
-        
-        .pixel_in(pixel_from_prod),
+        .pixel_in(proc_pixel_in_reg),
         .pixel_out(output_pixel),
-        .VALID_IN(valid_from_prod && start_reg),
+        .VALID_IN(proc_valid_in_reg),
         .READY_OUT(proc_ready_out),
         .VALID_OUT(output_valid_flag),
-        .READY_IN(proc_ready_in),
-        
+        .READY_IN(cpu_read_ack), 
         .mode(mode_reg),
         .start(start_reg)
     );
+
+    // -------------------------------------------------------------------------
+    // 5. Read Data Mux
+    // -------------------------------------------------------------------------
+    reg [31:0] rdata_reg;
+    always @(*) begin
+        rdata_reg = 32'd0;
+        if (control_sel) rdata_reg = {29'b0, control_reg};
+        if (status_sel)  rdata_reg = {30'b0, output_valid_flag, !proc_ready_out};
+        if (count_sel)   rdata_reg = pixel_count_reg;
+        if (output_sel)  rdata_reg = {23'b0, output_valid_flag, output_pixel};
+    end
+    assign mem_rdata = rdata_reg;
 
 endmodule

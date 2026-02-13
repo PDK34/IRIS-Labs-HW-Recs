@@ -95,5 +95,63 @@ For validating the testbench , i've used a sample checkerboard 32x32 image(origi
 
 ## Part C : Integrating with RISC-V SoC
 
-### Register map defined to integrate our data processing block to the soc:
+- ### Register map defined to integrate data processing block to the soc:
 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Address</th>
+      <th style="text-align:left">Register Name</th>
+      <th style="text-align:center">Access</th>
+      <th style="text-align:left">Description</th>
+      <th style="text-align:left">Bit Fields</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>0x02001000</code></td>
+      <td><strong>DP_CONTROL</strong></td>
+      <td style="text-align:center">R/W</td>
+      <td>Control register to configure mode and start execution</td>
+      <td>
+        <strong>[2:1]</strong> Mode Select:<br>
+        &nbsp;&nbsp;<code>00</code> = Bypass<br>
+        &nbsp;&nbsp;<code>01</code> = Invert<br>
+        &nbsp;&nbsp;<code>10</code> = Convolution<br>
+        <strong>[0]</strong> Start (1 = Enable)
+      </td>
+    </tr>
+    <tr>
+      <td><code>0x02001004</code></td>
+      <td><strong>DP_STATUS</strong></td>
+      <td style="text-align:center">R/O</td>
+      <td>Status flags to check hardware state</td>
+      <td>
+        <strong>[1]</strong> Output Valid (1 = Ready to read)<br>
+        <strong>[0]</strong> Busy (1 = Processing)
+      </td>
+    </tr>
+    <tr>
+      <td><code>0x02001008</code></td>
+      <td><strong>DP_PIXCOUNT</strong></td>
+      <td style="text-align:center">R/O</td>
+      <td>Track processed pixels</td>
+      <td>
+        <strong>[31:0]</strong> Total Pixel Count
+      </td>
+    </tr>
+    <tr>
+      <td><code>0x0200100C</code></td>
+      <td><strong>DP_DATA</strong></td>
+      <td style="text-align:center">R/W</td>
+      <td>Data port for streaming pixels out</td>
+      <td>
+        <strong>[8]</strong> Read Valid Flag (Read-only)<br>
+        <strong>[7:0]</strong> Pixel Data (Input/Output)
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+- ### Design :
+  1. Bus interface : data_proc_wrapper.v implements a minimal handshaking protocol linking the cpu core with the processing block. The CPU core only writes and read to and from the 32 bit registers defined above, similar to how it will do any other memory mapped peripheral.Hence,this wrapper logic is necessary to decode these address values of registers in a way that the hardware block can understand and act on it.

@@ -1,145 +1,68 @@
 #include <stdint.h>
-#include <stdbool.h>
 
-#define reg_uart_clkdiv (*(volatile uint32_t*)0x02000004)
-#define reg_uart_data (*(volatile uint32_t*)0x02000008)
+#define FLASH_IMAGE_ADDR 0x00100000
 
-/*---------Define your data processing registers addresses here -----------------*/
-#define DATAPROC_CONTROL   (*(volatile uint32_t*)0x02001000)
-#define DATAPROC_STATUS    (*(volatile uint32_t*)0x02001004)
-#define DATAPROC_PIXCOUNT  (*(volatile uint32_t*)0x02001008)
-#define DATAPROC_OUTPUT    (*(volatile uint32_t*)0x0200100C)
 
-/*---------------------------------------------------------------------------------*/
+#define REG_UART_CLKDIV (*(volatile uint32_t*)0x02000004)
+#define REG_UART_DATA   (*(volatile uint32_t*)0x02000008)
 
-void uart_putc(char c);
-void print(const char *p);
-//utility fn
+//Processor mapped custom Registers
+#define DP_CONTROL      (*(volatile uint32_t*)0x02001000)
+#define DP_STATUS       (*(volatile uint32_t*)0x02001004)
+#define DP_OUTPUT       (*(volatile uint32_t*)0x0200100C)
+#define DP_INPUT        (*(volatile uint32_t*)0x02001010) 
+
+
+//Dummy array to simulate Flash Data
+const uint8_t test_image[] = {
+    0x00, 0xFF, 0x00, 0xFF, 0x10, 0x20, 0x30, 0x40,
+    0x00, 0x00, 0xFF, 0xFF, 0x00, 0x00, 0xFF, 0xFF
+};
+
+void putchar(char c) {
+    if (c == '\n') putchar('\r');
+    REG_UART_DATA = c;
+}
+
+void print(const char *p) {
+    while (*p) putchar(*(p++));
+}
+
 void print_hex(uint8_t val) {
     const char hex[] = "0123456789ABCDEF";
-    uart_putc(hex[val >> 4]);
-    uart_putc(hex[val & 0xF]);
-}
-
-void print_hex32(uint32_t val) {
-    print_hex((val >> 24) & 0xFF);
-    print_hex((val >> 16) & 0xFF);
-    print_hex((val >> 8) & 0xFF);
-    print_hex(val & 0xFF);
+    putchar(hex[val >> 4]);
+    putchar(hex[val & 0xF]);
 }
 
 
-void main()
-{
-	reg_uart_clkdiv = 104;
+void main() {
+    REG_UART_CLKDIV = 104;
+    
+    print("Booting from RAM...\n");
+    print("Reading Image from SPI Flash\n");
 
-    //Register Read/Write
-    print("Register Access\n");
-    
-    //Write to control register
-    DATAPROC_CONTROL = 0x01;  // start=1, mode=00
-    
-    //Read it back
-    uint32_t ctrl = DATAPROC_CONTROL;
-    print("  CONTROL written: 0x01\n");
-    print("  CONTROL read:    0x");
-    print_hex32(ctrl);
-    if (ctrl == 0x01)
-        print("  [PASS]\n");
-    else
-        print("  [FAIL]\n");
-    print("\n");
-    
-    //Read status Register
-    print("Status Register\n");
-    
-    uint32_t status = DATAPROC_STATUS;
-    print("  STATUS: 0x");
-    print_hex32(status);
-    print("\n");
-    print("    Busy bit:  ");
-    print((status & 0x01) ? "1\n" : "0\n");
-    print("    Valid bit: ");
-    print((status & 0x02) ? "1\n" : "0\n");
-    print("\n");
-    
-    //process first 16 Pixels in Bypass Mode
-    print("Bypass Mode (16 pixels)\n");
-    
-    DATAPROC_CONTROL = 0x01;  // mode=00 (bypass), start=1
-    
-    print("  Outputs: ");
-    for (int i = 0; i < 16; i++) {
-        // Wait for valid output
-        int timeout = 10000;
-        while (!(DATAPROC_STATUS & 0x02) && timeout-- > 0);
+    //Invert Mode
+    DP_CONTROL = 0x03; 
+
+    volatile uint8_t *flash_image = (uint8_t *)FLASH_IMAGE_ADDR;
+
+    print("Processing:\n");
+
+    //Process 16 pixels from Flash
+    for(int i = 0; i < 16; i++) {
         
-        if (timeout > 0) {
-            uint8_t pixel = DATAPROC_OUTPUT & 0xFF;
-            print_hex(pixel);
-            print(" ");
-        } else {
-            print("TO ");  // Timeout
-        }
-    }
-    print("\n");
-    
-    // Check pixel count
-    uint32_t count = DATAPROC_PIXCOUNT;
-    print("  Pixel count: ");
-    print_hex32(count);
-    print("\n\n");
-    
-    //Invert Mode (16 pixels)
-    print("Test 4: Invert Mode (16 pixels)\n");
-    
-    // Stop first
-    DATAPROC_CONTROL = 0x00;
-    
-    // Small delay
-    for (volatile int i = 0; i < 1000; i++);
-    
-    // Start in invert mode
-    DATAPROC_CONTROL = 0x03;  // mode=01 (invert), start=1
-    
-    print("  Outputs: ");
-    for (int i = 0; i < 16; i++) {
-        int timeout = 10000;
-        while (!(DATAPROC_STATUS & 0x02) && timeout-- > 0);
+        uint8_t pixel = flash_image[i]; 
         
-        if (timeout > 0) {
-            uint8_t pixel = DATAPROC_OUTPUT & 0xFF;
-            print_hex(pixel);
-            print(" ");
-        } else {
-            print("TO ");
-        }
+        DP_INPUT = pixel;
+        
+        while((DP_STATUS & 0x02) == 0);
+        
+        print_hex(DP_OUTPUT & 0xFF);
+        print(" ");
     }
-    print("\n");
     
-    count = DATAPROC_PIXCOUNT;
-    print("  Pixel count: ");
-    print_hex32(count);
-    print("\n\n");
+    print("\nDone.\n");
     
-    
-    print("All tests completed\n");
-    
-    DATAPROC_CONTROL = 0x00;
-    
-    while (1);
+    DP_CONTROL = 0x00;
+    while(1);
 }
-
-void uart_putc(char c)
-{
-	if (c == '\n')
-		uart_putc('\r');
-	reg_uart_data = c;
-}
-
-void print(const char *p)
-{
-	while (*p)
-		uart_putc(*(p++));
-}
-

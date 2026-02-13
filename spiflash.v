@@ -60,8 +60,7 @@ module spiflash (
 	reg [7:0] spi_out;
 	reg spi_io_vld;
 
-	reg powered_up = 0;
-
+	reg powered_up = 0; 
 	localparam [3:0] mode_spi         = 1;
 	localparam [3:0] mode_dspi_rd     = 2;
 	localparam [3:0] mode_dspi_wr     = 3;
@@ -105,7 +104,7 @@ module spiflash (
 	initial begin
 		if (!$value$plusargs("firmware=%s", firmware_file))
 			firmware_file = "firmware.hex";
-		$readmemh(firmware_file, memory);
+		$readmemh(firmware_file, memory); 
 	end
 
 	task spi_action;
